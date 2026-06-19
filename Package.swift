@@ -3,34 +3,34 @@
 import PackageDescription
 
 let package = Package(
-    name: "Printy",
+    name: "Snapmark",
     platforms: [
         .macOS(.v15)
     ],
     products: [
-        .library(name: "PrintyCore", targets: ["PrintyCore"]),
-        .executable(name: "Printy", targets: ["Printy"])
+        .library(name: "SnapmarkCore", targets: ["SnapmarkCore"]),
+        .executable(name: "Snapmark", targets: ["Snapmark"])
     ],
     targets: [
         .target(
-            name: "PrintyCore",
-            path: "PrintyCore"
+            name: "SnapmarkCore",
+            path: "SnapmarkCore"
         ),
         .executableTarget(
-            name: "Printy",
-            dependencies: ["PrintyCore"],
-            path: "Printy",
+            name: "Snapmark",
+            dependencies: ["SnapmarkCore"],
+            path: "Snapmark",
             exclude: ["Info.plist"]
         ),
         .executableTarget(
-            name: "PrintyVerification",
-            dependencies: ["PrintyCore"],
-            path: "Verification"
+            name: "SnapmarkVerification",
+            dependencies: ["SnapmarkCore"],
+            path: "SnapmarkVerification"
         ),
         .testTarget(
-            name: "PrintyCoreTests",
-            dependencies: ["PrintyCore"],
-            path: "PrintyCoreTests"
+            name: "SnapmarkCoreTests",
+            dependencies: ["SnapmarkCore"],
+            path: "SnapmarkCoreTests"
         )
     ],
     swiftLanguageModes: [.v5]

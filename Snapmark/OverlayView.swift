@@ -1,6 +1,6 @@
 import AppKit
 import Carbon.HIToolbox
-import PrintyCore
+import SnapmarkCore
 
 @MainActor
 final class OverlayView: NSView {

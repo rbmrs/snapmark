@@ -1,4 +1,4 @@
-# Printy
+# Snapmark
 
 Minimal macOS screenshot annotation from the menu bar.
 
@@ -31,5 +31,5 @@ The global shortcut is configurable from the menu-bar settings.
 
 ```sh
 swift build -Xswiftc -warnings-as-errors
-swift run PrintyVerification
+swift run SnapmarkVerification
 ```

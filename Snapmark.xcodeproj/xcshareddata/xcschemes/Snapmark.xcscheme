@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E00000000000000000000002"
-               BuildableName = "Printy.app"
-               BlueprintName = "Printy"
-               ReferencedContainer = "container:Printy.xcodeproj">
+               BuildableName = "Snapmark.app"
+               BlueprintName = "Snapmark"
+               ReferencedContainer = "container:Snapmark.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E00000000000000000000003"
-               BuildableName = "PrintyCoreTests.xctest"
-               BlueprintName = "PrintyCoreTests"
-               ReferencedContainer = "container:Printy.xcodeproj">
+               BuildableName = "SnapmarkCoreTests.xctest"
+               BlueprintName = "SnapmarkCoreTests"
+               ReferencedContainer = "container:Snapmark.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E00000000000000000000002"
-            BuildableName = "Printy.app"
-            BlueprintName = "Printy"
-            ReferencedContainer = "container:Printy.xcodeproj">
+            BuildableName = "Snapmark.app"
+            BlueprintName = "Snapmark"
+            ReferencedContainer = "container:Snapmark.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E00000000000000000000002"
-            BuildableName = "Printy.app"
-            BlueprintName = "Printy"
-            ReferencedContainer = "container:Printy.xcodeproj">
+            BuildableName = "Snapmark.app"
+            BlueprintName = "Snapmark"
+            ReferencedContainer = "container:Snapmark.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

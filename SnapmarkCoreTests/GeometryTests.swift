@@ -1,6 +1,6 @@
 import CoreGraphics
 import XCTest
-@testable import PrintyCore
+@testable import SnapmarkCore
 
 final class GeometryTests: XCTestCase {
     func testNormalizedRectAcceptsReversedCorners() {

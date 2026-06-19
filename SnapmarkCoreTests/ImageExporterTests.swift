@@ -1,7 +1,7 @@
 import AppKit
 import CoreGraphics
 import XCTest
-@testable import PrintyCore
+@testable import SnapmarkCore
 
 final class ImageExporterTests: XCTestCase {
     func testExportKeepsNativeRetinaDimensions() throws {

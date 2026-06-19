@@ -1,7 +1,7 @@
 import AppKit
 import CoreGraphics
 import Foundation
-import PrintyCore
+import SnapmarkCore
 import ScreenCaptureKit
 
 struct CapturedDisplay {
@@ -94,7 +94,7 @@ final class CaptureCoordinator {
             _ = CGRequestScreenCaptureAccess()
 
             // macOS owns the first-run permission prompt. Do not place a
-            // second Printy alert underneath it; the user can invoke capture
+            // second Snapmark alert underneath it; the user can invoke capture
             // again after granting access.
             return false
         }
@@ -195,7 +195,7 @@ final class CaptureCoordinator {
     private func showCaptureError(_ error: Error) {
         let alert = NSAlert()
         alert.alertStyle = .critical
-        alert.messageText = "Printy Could Not Capture the Screen"
+        alert.messageText = "Snapmark Could Not Capture the Screen"
         alert.informativeText = error.localizedDescription
         alert.addButton(withTitle: "OK")
         NSApplication.shared.activate(ignoringOtherApps: true)

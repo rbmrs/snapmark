@@ -21,7 +21,7 @@ struct SettingsView: View {
             }
 
             Toggle(
-                "Launch Printy at login",
+                "Launch Snapmark at login",
                 isOn: Binding(
                     get: { model.launchAtLogin },
                     set: { model.setLaunchAtLogin($0) }
@@ -34,7 +34,7 @@ struct SettingsView: View {
                     .foregroundStyle(.red)
             }
 
-            Text("Printy requires Screen & System Audio Recording permission to capture the screen. It does not require Accessibility permission.")
+            Text("Snapmark requires Screen & System Audio Recording permission to capture the screen. It does not require Accessibility permission.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

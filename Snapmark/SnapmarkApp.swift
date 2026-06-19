@@ -2,12 +2,12 @@ import AppKit
 import SwiftUI
 
 @main
-struct PrintyApp: App {
-    @NSApplicationDelegateAdaptor(PrintyAppDelegate.self) private var appDelegate
+struct SnapmarkApp: App {
+    @NSApplicationDelegateAdaptor(SnapmarkAppDelegate.self) private var appDelegate
     @StateObject private var model = AppModel.shared
 
     var body: some Scene {
-        MenuBarExtra("Printy", systemImage: "viewfinder") {
+        MenuBarExtra("Snapmark", systemImage: "viewfinder") {
             Button("Capture Area") {
                 model.startCapture()
             }
@@ -22,7 +22,7 @@ struct PrintyApp: App {
 
             Divider()
 
-            Button("Quit Printy") {
+            Button("Quit Snapmark") {
                 NSApplication.shared.terminate(nil)
             }
             .keyboardShortcut("q")
@@ -34,7 +34,7 @@ struct PrintyApp: App {
     }
 }
 
-final class PrintyAppDelegate: NSObject, NSApplicationDelegate {
+final class SnapmarkAppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApplication.shared.setActivationPolicy(.accessory)
         AppModel.shared.start()

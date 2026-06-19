@@ -1,6 +1,6 @@
 import AppKit
 import CoreGraphics
-import PrintyCore
+import SnapmarkCore
 
 func require(_ condition: @autoclosure () -> Bool, _ message: String) {
     guard condition() else {
@@ -75,4 +75,4 @@ require(output.width == 60 && output.height == 40, "Retina export dimensions")
 let pngData = try ImageExporter.pngData(from: output)
 require(!pngData.isEmpty, "PNG encoding")
 
-print("Printy verification passed")
+print("Snapmark verification passed")

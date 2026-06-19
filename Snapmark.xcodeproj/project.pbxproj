@@ -11,7 +11,7 @@
 		A00000000000000000000002 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* Annotation.swift */; };
 		A00000000000000000000003 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* CaptureSession.swift */; };
 		A00000000000000000000004 /* ImageExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* ImageExporter.swift */; };
-		A00000000000000000000005 /* PrintyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* PrintyApp.swift */; };
+		A00000000000000000000005 /* SnapmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* SnapmarkApp.swift */; };
 		A00000000000000000000006 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* AppModel.swift */; };
 		A00000000000000000000007 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000007 /* HotKeyManager.swift */; };
 		A00000000000000000000008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000008 /* SettingsView.swift */; };
@@ -21,9 +21,9 @@
 		A0000000000000000000000C /* AnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* AnnotationTests.swift */; };
 		A0000000000000000000000D /* CaptureSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* CaptureSessionTests.swift */; };
 		A0000000000000000000000E /* ImageExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* ImageExporterTests.swift */; };
-		A0000000000000000000000F /* PrintyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; };
-		A00000000000000000000010 /* PrintyCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A00000000000000000000011 /* PrintyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; };
+		A0000000000000000000000F /* SnapmarkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; };
+		A00000000000000000000010 /* SnapmarkCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A00000000000000000000011 /* SnapmarkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; };
 		A00000000000000000000012 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* AppKit.framework */; };
 		A00000000000000000000013 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* AppKit.framework */; };
 		A00000000000000000000014 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000021 /* SwiftUI.framework */; };
@@ -39,14 +39,14 @@
 			containerPortal = D00000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E00000000000000000000001;
-			remoteInfo = PrintyCore;
+			remoteInfo = SnapmarkCore;
 		};
 		C00000000000000000000002 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D00000000000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E00000000000000000000001;
-			remoteInfo = PrintyCore;
+			remoteInfo = SnapmarkCore;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,7 +57,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A00000000000000000000010 /* PrintyCore.framework in Embed Frameworks */,
+				A00000000000000000000010 /* SnapmarkCore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +69,7 @@
 		B00000000000000000000002 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		B00000000000000000000003 /* CaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
 		B00000000000000000000004 /* ImageExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporter.swift; sourceTree = "<group>"; };
-		B00000000000000000000005 /* PrintyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintyApp.swift; sourceTree = "<group>"; };
+		B00000000000000000000005 /* SnapmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapmarkApp.swift; sourceTree = "<group>"; };
 		B00000000000000000000006 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		B00000000000000000000007 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
 		B00000000000000000000008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -80,9 +80,9 @@
 		B0000000000000000000000D /* AnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000E /* CaptureSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000F /* ImageExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporterTests.swift; sourceTree = "<group>"; };
-		B00000000000000000000010 /* Printy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printy.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B00000000000000000000011 /* PrintyCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrintyCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B00000000000000000000012 /* PrintyCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PrintyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000010 /* Snapmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000011 /* SnapmarkCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapmarkCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000012 /* SnapmarkCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapmarkCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000013 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B00000000000000000000020 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		B00000000000000000000021 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -105,7 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0000000000000000000000F /* PrintyCore.framework in Frameworks */,
+				A0000000000000000000000F /* SnapmarkCore.framework in Frameworks */,
 				A00000000000000000000013 /* AppKit.framework in Frameworks */,
 				A00000000000000000000014 /* SwiftUI.framework in Frameworks */,
 				A00000000000000000000015 /* ScreenCaptureKit.framework in Frameworks */,
@@ -118,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00000000000000000000011 /* PrintyCore.framework in Frameworks */,
+				A00000000000000000000011 /* SnapmarkCore.framework in Frameworks */,
 				A00000000000000000000018 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,15 +130,15 @@
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000013 /* Package.swift */,
-				D00000000000000000000003 /* PrintyCore */,
-				D00000000000000000000004 /* Printy */,
-				D00000000000000000000005 /* PrintyCoreTests */,
+				D00000000000000000000003 /* SnapmarkCore */,
+				D00000000000000000000004 /* Snapmark */,
+				D00000000000000000000005 /* SnapmarkCoreTests */,
 				D00000000000000000000006 /* Frameworks */,
 				D00000000000000000000007 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		D00000000000000000000003 /* PrintyCore */ = {
+		D00000000000000000000003 /* SnapmarkCore */ = {
 			isa = PBXGroup;
 			children = (
 				B00000000000000000000001 /* Geometry.swift */,
@@ -146,13 +146,13 @@
 				B00000000000000000000003 /* CaptureSession.swift */,
 				B00000000000000000000004 /* ImageExporter.swift */,
 			);
-			path = PrintyCore;
+			path = SnapmarkCore;
 			sourceTree = "<group>";
 		};
-		D00000000000000000000004 /* Printy */ = {
+		D00000000000000000000004 /* Snapmark */ = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000005 /* PrintyApp.swift */,
+				B00000000000000000000005 /* SnapmarkApp.swift */,
 				B00000000000000000000006 /* AppModel.swift */,
 				B00000000000000000000007 /* HotKeyManager.swift */,
 				B00000000000000000000008 /* SettingsView.swift */,
@@ -160,10 +160,10 @@
 				B0000000000000000000000A /* OverlayView.swift */,
 				B0000000000000000000000B /* Info.plist */,
 			);
-			path = Printy;
+			path = Snapmark;
 			sourceTree = "<group>";
 		};
-		D00000000000000000000005 /* PrintyCoreTests */ = {
+		D00000000000000000000005 /* SnapmarkCoreTests */ = {
 			isa = PBXGroup;
 			children = (
 				B0000000000000000000000C /* GeometryTests.swift */,
@@ -171,7 +171,7 @@
 				B0000000000000000000000E /* CaptureSessionTests.swift */,
 				B0000000000000000000000F /* ImageExporterTests.swift */,
 			);
-			path = PrintyCoreTests;
+			path = SnapmarkCoreTests;
 			sourceTree = "<group>";
 		};
 		D00000000000000000000006 /* Frameworks */ = {
@@ -190,9 +190,9 @@
 		D00000000000000000000007 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B00000000000000000000010 /* Printy.app */,
-				B00000000000000000000012 /* PrintyCore.framework */,
-				B00000000000000000000011 /* PrintyCoreTests.xctest */,
+				B00000000000000000000010 /* Snapmark.app */,
+				B00000000000000000000012 /* SnapmarkCore.framework */,
+				B00000000000000000000011 /* SnapmarkCoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,9 +200,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E00000000000000000000001 /* PrintyCore */ = {
+		E00000000000000000000001 /* SnapmarkCore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E00000000000000000000011 /* Build configuration list for PBXNativeTarget "PrintyCore" */;
+			buildConfigurationList = E00000000000000000000011 /* Build configuration list for PBXNativeTarget "SnapmarkCore" */;
 			buildPhases = (
 				F00000000000000000000001 /* Sources */,
 				F00000000000000000000002 /* Frameworks */,
@@ -211,14 +211,14 @@
 			);
 			dependencies = (
 			);
-			name = PrintyCore;
-			productName = PrintyCore;
-			productReference = B00000000000000000000012 /* PrintyCore.framework */;
+			name = SnapmarkCore;
+			productName = SnapmarkCore;
+			productReference = B00000000000000000000012 /* SnapmarkCore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E00000000000000000000002 /* Printy */ = {
+		E00000000000000000000002 /* Snapmark */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Printy" */;
+			buildConfigurationList = E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Snapmark" */;
 			buildPhases = (
 				F00000000000000000000003 /* Sources */,
 				F00000000000000000000004 /* Frameworks */,
@@ -229,14 +229,14 @@
 			dependencies = (
 				C00000000000000000000011 /* PBXTargetDependency */,
 			);
-			name = Printy;
-			productName = Printy;
-			productReference = B00000000000000000000010 /* Printy.app */;
+			name = Snapmark;
+			productName = Snapmark;
+			productReference = B00000000000000000000010 /* Snapmark.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E00000000000000000000003 /* PrintyCoreTests */ = {
+		E00000000000000000000003 /* SnapmarkCoreTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E00000000000000000000013 /* Build configuration list for PBXNativeTarget "PrintyCoreTests" */;
+			buildConfigurationList = E00000000000000000000013 /* Build configuration list for PBXNativeTarget "SnapmarkCoreTests" */;
 			buildPhases = (
 				F00000000000000000000007 /* Sources */,
 				F00000000000000000000008 /* Frameworks */,
@@ -246,9 +246,9 @@
 			dependencies = (
 				C00000000000000000000012 /* PBXTargetDependency */,
 			);
-			name = PrintyCoreTests;
-			productName = PrintyCoreTests;
-			productReference = B00000000000000000000011 /* PrintyCoreTests.xctest */;
+			name = SnapmarkCoreTests;
+			productName = SnapmarkCoreTests;
+			productReference = B00000000000000000000011 /* SnapmarkCoreTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -273,7 +273,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E00000000000000000000010 /* Build configuration list for PBXProject "Printy" */;
+			buildConfigurationList = E00000000000000000000010 /* Build configuration list for PBXProject "Snapmark" */;
 			compatibilityVersion = "Xcode 16.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -287,9 +287,9 @@
 			preferredProjectObjectVersion = 77;
 			projectRoot = "";
 			targets = (
-				E00000000000000000000002 /* Printy */,
-				E00000000000000000000001 /* PrintyCore */,
-				E00000000000000000000003 /* PrintyCoreTests */,
+				E00000000000000000000002 /* Snapmark */,
+				E00000000000000000000001 /* SnapmarkCore */,
+				E00000000000000000000003 /* SnapmarkCoreTests */,
 			);
 		};
 /* End PBXProject section */
@@ -310,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00000000000000000000005 /* PrintyApp.swift in Sources */,
+				A00000000000000000000005 /* SnapmarkApp.swift in Sources */,
 				A00000000000000000000006 /* AppModel.swift in Sources */,
 				A00000000000000000000007 /* HotKeyManager.swift in Sources */,
 				A00000000000000000000008 /* SettingsView.swift in Sources */,
@@ -335,12 +335,12 @@
 /* Begin PBXTargetDependency section */
 		C00000000000000000000011 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E00000000000000000000001 /* PrintyCore */;
+			target = E00000000000000000000001 /* SnapmarkCore */;
 			targetProxy = C00000000000000000000001 /* PBXContainerItemProxy */;
 		};
 		C00000000000000000000012 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E00000000000000000000001 /* PrintyCore */;
+			target = E00000000000000000000001 /* SnapmarkCore */;
 			targetProxy = C00000000000000000000002 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -397,7 +397,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.SnapmarkCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -415,7 +415,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = YES;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCore;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.SnapmarkCore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -430,12 +430,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Printy/Info.plist;
+				INFOPLIST_FILE = Snapmark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Printy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Snapmark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -449,12 +449,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Printy/Info.plist;
+				INFOPLIST_FILE = Snapmark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Printy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Snapmark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
@@ -473,7 +473,7 @@
 					"@executable_path/../Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.SnapmarkCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 			};
@@ -491,7 +491,7 @@
 					"@executable_path/../Frameworks",
 					"$(BUILT_PRODUCTS_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCoreTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.SnapmarkCoreTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 			};
@@ -500,7 +500,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E00000000000000000000010 /* Build configuration list for PBXProject "Printy" */ = {
+		E00000000000000000000010 /* Build configuration list for PBXProject "Snapmark" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E00000000000000000000020 /* Debug */,
@@ -509,7 +509,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E00000000000000000000011 /* Build configuration list for PBXNativeTarget "PrintyCore" */ = {
+		E00000000000000000000011 /* Build configuration list for PBXNativeTarget "SnapmarkCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E00000000000000000000030 /* Debug */,
@@ -518,7 +518,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Printy" */ = {
+		E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Snapmark" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E00000000000000000000040 /* Debug */,
@@ -527,7 +527,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E00000000000000000000013 /* Build configuration list for PBXNativeTarget "PrintyCoreTests" */ = {
+		E00000000000000000000013 /* Build configuration list for PBXNativeTarget "SnapmarkCoreTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E00000000000000000000050 /* Debug */,
