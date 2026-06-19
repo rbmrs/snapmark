@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A00000000000000000000001 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* Geometry.swift */; };
+		A00000000000000000000002 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* Annotation.swift */; };
+		A00000000000000000000003 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* CaptureSession.swift */; };
+		A00000000000000000000004 /* ImageExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* ImageExporter.swift */; };
+		A00000000000000000000005 /* PrintyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* PrintyApp.swift */; };
+		A00000000000000000000006 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* AppModel.swift */; };
+		A00000000000000000000007 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000007 /* HotKeyManager.swift */; };
+		A00000000000000000000008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000008 /* SettingsView.swift */; };
+		A00000000000000000000009 /* CaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000009 /* CaptureCoordinator.swift */; };
+		A0000000000000000000000A /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000A /* OverlayView.swift */; };
+		A0000000000000000000000B /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000C /* GeometryTests.swift */; };
+		A0000000000000000000000C /* AnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* AnnotationTests.swift */; };
+		A0000000000000000000000D /* CaptureSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* CaptureSessionTests.swift */; };
+		A0000000000000000000000E /* ImageExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* ImageExporterTests.swift */; };
+		A0000000000000000000000F /* PrintyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; };
+		A00000000000000000000010 /* PrintyCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A00000000000000000000011 /* PrintyCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* PrintyCore.framework */; };
+		A00000000000000000000012 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* AppKit.framework */; };
+		A00000000000000000000013 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000020 /* AppKit.framework */; };
+		A00000000000000000000014 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000021 /* SwiftUI.framework */; };
+		A00000000000000000000015 /* ScreenCaptureKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000022 /* ScreenCaptureKit.framework */; };
+		A00000000000000000000016 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000023 /* ServiceManagement.framework */; };
+		A00000000000000000000017 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000024 /* Carbon.framework */; };
+		A00000000000000000000018 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000025 /* XCTest.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C00000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E00000000000000000000001;
+			remoteInfo = PrintyCore;
+		};
+		C00000000000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E00000000000000000000001;
+			remoteInfo = PrintyCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F00000000000000000000006 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A00000000000000000000010 /* PrintyCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B00000000000000000000001 /* Geometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
+		B00000000000000000000002 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
+		B00000000000000000000003 /* CaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
+		B00000000000000000000004 /* ImageExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporter.swift; sourceTree = "<group>"; };
+		B00000000000000000000005 /* PrintyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintyApp.swift; sourceTree = "<group>"; };
+		B00000000000000000000006 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		B00000000000000000000007 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B00000000000000000000009 /* CaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureCoordinator.swift; sourceTree = "<group>"; };
+		B0000000000000000000000A /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		B0000000000000000000000B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0000000000000000000000C /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
+		B0000000000000000000000D /* AnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationTests.swift; sourceTree = "<group>"; };
+		B0000000000000000000000E /* CaptureSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionTests.swift; sourceTree = "<group>"; };
+		B0000000000000000000000F /* ImageExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporterTests.swift; sourceTree = "<group>"; };
+		B00000000000000000000010 /* Printy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Printy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000011 /* PrintyCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrintyCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000012 /* PrintyCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PrintyCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000013 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		B00000000000000000000020 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		B00000000000000000000021 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B00000000000000000000022 /* ScreenCaptureKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenCaptureKit.framework; path = System/Library/Frameworks/ScreenCaptureKit.framework; sourceTree = SDKROOT; };
+		B00000000000000000000023 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		B00000000000000000000024 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		B00000000000000000000025 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F00000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000012 /* AppKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000004 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000000F /* PrintyCore.framework in Frameworks */,
+				A00000000000000000000013 /* AppKit.framework in Frameworks */,
+				A00000000000000000000014 /* SwiftUI.framework in Frameworks */,
+				A00000000000000000000015 /* ScreenCaptureKit.framework in Frameworks */,
+				A00000000000000000000016 /* ServiceManagement.framework in Frameworks */,
+				A00000000000000000000017 /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000008 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000011 /* PrintyCore.framework in Frameworks */,
+				A00000000000000000000018 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D00000000000000000000002 = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000013 /* Package.swift */,
+				D00000000000000000000003 /* PrintyCore */,
+				D00000000000000000000004 /* Printy */,
+				D00000000000000000000005 /* PrintyCoreTests */,
+				D00000000000000000000006 /* Frameworks */,
+				D00000000000000000000007 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D00000000000000000000003 /* PrintyCore */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000001 /* Geometry.swift */,
+				B00000000000000000000002 /* Annotation.swift */,
+				B00000000000000000000003 /* CaptureSession.swift */,
+				B00000000000000000000004 /* ImageExporter.swift */,
+			);
+			path = PrintyCore;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000004 /* Printy */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000005 /* PrintyApp.swift */,
+				B00000000000000000000006 /* AppModel.swift */,
+				B00000000000000000000007 /* HotKeyManager.swift */,
+				B00000000000000000000008 /* SettingsView.swift */,
+				B00000000000000000000009 /* CaptureCoordinator.swift */,
+				B0000000000000000000000A /* OverlayView.swift */,
+				B0000000000000000000000B /* Info.plist */,
+			);
+			path = Printy;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000005 /* PrintyCoreTests */ = {
+			isa = PBXGroup;
+			children = (
+				B0000000000000000000000C /* GeometryTests.swift */,
+				B0000000000000000000000D /* AnnotationTests.swift */,
+				B0000000000000000000000E /* CaptureSessionTests.swift */,
+				B0000000000000000000000F /* ImageExporterTests.swift */,
+			);
+			path = PrintyCoreTests;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000006 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000020 /* AppKit.framework */,
+				B00000000000000000000021 /* SwiftUI.framework */,
+				B00000000000000000000022 /* ScreenCaptureKit.framework */,
+				B00000000000000000000023 /* ServiceManagement.framework */,
+				B00000000000000000000024 /* Carbon.framework */,
+				B00000000000000000000025 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000010 /* Printy.app */,
+				B00000000000000000000012 /* PrintyCore.framework */,
+				B00000000000000000000011 /* PrintyCoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E00000000000000000000001 /* PrintyCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E00000000000000000000011 /* Build configuration list for PBXNativeTarget "PrintyCore" */;
+			buildPhases = (
+				F00000000000000000000001 /* Sources */,
+				F00000000000000000000002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PrintyCore;
+			productName = PrintyCore;
+			productReference = B00000000000000000000012 /* PrintyCore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E00000000000000000000002 /* Printy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Printy" */;
+			buildPhases = (
+				F00000000000000000000003 /* Sources */,
+				F00000000000000000000004 /* Frameworks */,
+				F00000000000000000000006 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C00000000000000000000011 /* PBXTargetDependency */,
+			);
+			name = Printy;
+			productName = Printy;
+			productReference = B00000000000000000000010 /* Printy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E00000000000000000000003 /* PrintyCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E00000000000000000000013 /* Build configuration list for PBXNativeTarget "PrintyCoreTests" */;
+			buildPhases = (
+				F00000000000000000000007 /* Sources */,
+				F00000000000000000000008 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C00000000000000000000012 /* PBXTargetDependency */,
+			);
+			name = PrintyCoreTests;
+			productName = PrintyCoreTests;
+			productReference = B00000000000000000000011 /* PrintyCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					E00000000000000000000001 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					E00000000000000000000002 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					E00000000000000000000003 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = E00000000000000000000002;
+					};
+				};
+			};
+			buildConfigurationList = E00000000000000000000010 /* Build configuration list for PBXProject "Printy" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D00000000000000000000002;
+			productRefGroup = D00000000000000000000007 /* Products */;
+			projectDirPath = "";
+			preferredProjectObjectVersion = 77;
+			projectRoot = "";
+			targets = (
+				E00000000000000000000002 /* Printy */,
+				E00000000000000000000001 /* PrintyCore */,
+				E00000000000000000000003 /* PrintyCoreTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F00000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000001 /* Geometry.swift in Sources */,
+				A00000000000000000000002 /* Annotation.swift in Sources */,
+				A00000000000000000000003 /* CaptureSession.swift in Sources */,
+				A00000000000000000000004 /* ImageExporter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000005 /* PrintyApp.swift in Sources */,
+				A00000000000000000000006 /* AppModel.swift in Sources */,
+				A00000000000000000000007 /* HotKeyManager.swift in Sources */,
+				A00000000000000000000008 /* SettingsView.swift in Sources */,
+				A00000000000000000000009 /* CaptureCoordinator.swift in Sources */,
+				A0000000000000000000000A /* OverlayView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000000B /* GeometryTests.swift in Sources */,
+				A0000000000000000000000C /* AnnotationTests.swift in Sources */,
+				A0000000000000000000000D /* CaptureSessionTests.swift in Sources */,
+				A0000000000000000000000E /* ImageExporterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C00000000000000000000011 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E00000000000000000000001 /* PrintyCore */;
+			targetProxy = C00000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		C00000000000000000000012 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E00000000000000000000001 /* PrintyCore */;
+			targetProxy = C00000000000000000000002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E00000000000000000000020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E00000000000000000000021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 15.2;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E00000000000000000000030 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Debug;
+		};
+		E00000000000000000000031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Release;
+		};
+		E00000000000000000000040 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Printy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Printy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Debug;
+		};
+		E00000000000000000000041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Printy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.Printy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Release;
+		};
+		E00000000000000000000050 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@executable_path/../Frameworks",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Debug;
+		};
+		E00000000000000000000051 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@executable_path/../Frameworks",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.rafaelbm.PrintyCoreTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E00000000000000000000010 /* Build configuration list for PBXProject "Printy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E00000000000000000000020 /* Debug */,
+				E00000000000000000000021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E00000000000000000000011 /* Build configuration list for PBXNativeTarget "PrintyCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E00000000000000000000030 /* Debug */,
+				E00000000000000000000031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E00000000000000000000012 /* Build configuration list for PBXNativeTarget "Printy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E00000000000000000000040 /* Debug */,
+				E00000000000000000000041 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E00000000000000000000013 /* Build configuration list for PBXNativeTarget "PrintyCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E00000000000000000000050 /* Debug */,
+				E00000000000000000000051 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D00000000000000000000001 /* Project object */;
+}
