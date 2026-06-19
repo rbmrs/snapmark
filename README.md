@@ -1,67 +1,35 @@
 # Printy
 
-Printy is a native macOS menu-bar screenshot tool. Press a configurable global shortcut, click two corners to select a region, add rectangle or arrow annotations, and press Return to copy the result as a PNG.
+Minimal macOS screenshot annotation from the menu bar.
 
-## Requirements
+Press `⌥⇧4`, click two corners, add rectangles or arrows, then press Return to copy the result.
 
-- macOS 15.2 or newer
-- Apple Command Line Tools
+## Install
 
-Install the tools once if needed:
+Requires macOS 15.2+ and Apple Command Line Tools:
 
 ```sh
 xcode-select --install
-```
-
-Full Xcode is optional.
-
-## Build and run without Xcode
-
-From this repository:
-
-```sh
-./scripts/run-app.sh
-```
-
-This compiles a release build, creates `dist/Printy.app`, applies a stable local designated requirement, verifies the bundle, and launches it. The stable requirement prevents macOS from identifying every rebuild solely by its changing binary hash.
-
-To install it under your user Applications folder:
-
-```sh
 ./scripts/install-app.sh
 ```
 
-This installs and launches `~/Applications/Printy.app`. On the first capture, allow Printy under **System Settings → Privacy & Security → Screen & System Audio Recording**.
-
-No Accessibility permission is required.
-
-An Apple Developer certificate is only necessary later for distributing Printy to other Macs.
+Allow Screen Recording when macOS prompts. Full Xcode and Accessibility permission are not required.
 
 ## Usage
 
-- Default global shortcut: `⌥⇧4`
-- First and second clicks: choose the screenshot corners
-- Rectangle or Arrow: click two endpoints
-- Select: click an annotation, then drag it or one of its handles
-- `V`, `R`, `A`: select, rectangle, and arrow tools
+- `⌥⇧4`: start capture
+- Two clicks: select the crop or draw an annotation
+- `V`, `R`, `A`: select, rectangle, arrow
 - `⌘Z`: undo
-- Delete: remove the selected annotation
-- Return: copy the annotated crop and close
-- Escape: cancel the current annotation, or cancel the capture
+- Delete: remove selection
+- Return: copy and close
+- Escape: cancel
 
-The menu-bar Settings window can change the global shortcut and optionally enable Launch at Login.
+The global shortcut is configurable from the menu-bar settings.
 
-## Verification
-
-With Command Line Tools:
+## Development
 
 ```sh
 swift build -Xswiftc -warnings-as-errors
 swift run PrintyVerification
-```
-
-Full Xcode can additionally run the XCTest suite:
-
-```sh
-xcodebuild -project Printy.xcodeproj -scheme Printy test
 ```
