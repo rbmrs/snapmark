@@ -20,7 +20,7 @@ let package = Package(
             name: "Snapmark",
             dependencies: ["SnapmarkCore"],
             path: "Snapmark",
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "Resources"]
         ),
         .executableTarget(
             name: "SnapmarkVerification",

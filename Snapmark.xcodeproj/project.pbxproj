@@ -31,6 +31,7 @@
 		A00000000000000000000016 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000023 /* ServiceManagement.framework */; };
 		A00000000000000000000017 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000024 /* Carbon.framework */; };
 		A00000000000000000000018 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000025 /* XCTest.framework */; };
+		A00000000000000000000019 /* Snapmark.icns in Resources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000026 /* Snapmark.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		B00000000000000000000023 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		B00000000000000000000024 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		B00000000000000000000025 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		B00000000000000000000026 /* Snapmark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Snapmark.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +161,17 @@
 				B00000000000000000000009 /* CaptureCoordinator.swift */,
 				B0000000000000000000000A /* OverlayView.swift */,
 				B0000000000000000000000B /* Info.plist */,
+				D00000000000000000000008 /* Resources */,
 			);
 			path = Snapmark;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000026 /* Snapmark.icns */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		D00000000000000000000005 /* SnapmarkCoreTests */ = {
@@ -222,6 +233,7 @@
 			buildPhases = (
 				F00000000000000000000003 /* Sources */,
 				F00000000000000000000004 /* Frameworks */,
+				F00000000000000000000009 /* Resources */,
 				F00000000000000000000006 /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -252,6 +264,17 @@
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F00000000000000000000009 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000019 /* Snapmark.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXProject section */
 		D00000000000000000000001 /* Project object */ = {

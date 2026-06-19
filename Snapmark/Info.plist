@@ -8,6 +8,8 @@
     <string>Snapmark</string>
     <key>CFBundleIdentifier</key>
     <string>com.rafaelbm.Snapmark</string>
+    <key>CFBundleIconFile</key>
+    <string>Snapmark</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>

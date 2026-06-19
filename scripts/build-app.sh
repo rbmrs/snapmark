@@ -32,6 +32,7 @@ mkdir -p "$MACOS_DIR" "$RESOURCES_DIR"
 
 cp "$EXECUTABLE" "$MACOS_DIR/Snapmark"
 cp "$ROOT_DIR/Snapmark/Info.plist" "$CONTENTS_DIR/Info.plist"
+cp "$ROOT_DIR/Snapmark/Resources/Snapmark.icns" "$RESOURCES_DIR/Snapmark.icns"
 
 chmod 755 "$MACOS_DIR/Snapmark"
 
