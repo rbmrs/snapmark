@@ -6,14 +6,18 @@ Press `⌥⇧4`, click two corners, add rectangles or arrows, then press Return 
 
 ## Install
 
-Requires macOS 15.2+ and Apple Command Line Tools:
+Requires macOS 15.2+ and Homebrew:
 
 ```sh
-xcode-select --install
-./scripts/install-app.sh
+brew install --cask rbmrs/snapmark/snapmark
+open -a Snapmark
 ```
 
-Allow Screen Recording when macOS prompts. Full Xcode and Accessibility permission are not required.
+Homebrew installs a prebuilt app. Xcode and Apple Command Line Tools are not required.
+
+Allow Screen Recording when macOS prompts on first capture. Snapmark does not require Accessibility permission.
+
+Snapmark is unsigned and not notarized, so macOS may still ask you to approve opening it.
 
 ## Usage
 
@@ -33,3 +37,5 @@ The global shortcut is configurable from the menu-bar settings.
 swift build -Xswiftc -warnings-as-errors
 swift run SnapmarkVerification
 ```
+
+Release packaging is documented in [docs/releasing.md](docs/releasing.md).

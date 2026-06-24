@@ -4,21 +4,23 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CONFIGURATION="${CONFIGURATION:-release}"
+ARCH="${ARCH:-$(uname -m)}"
 OUTPUT_DIR="${OUTPUT_DIR:-$ROOT_DIR/dist}"
-APP_DIR="$OUTPUT_DIR/Snapmark.app"
+APP_DIR="${APP_DIR:-$OUTPUT_DIR/Snapmark.app}"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
 RESOURCES_DIR="$CONTENTS_DIR/Resources"
 
 cd "$ROOT_DIR"
 
-echo "Building Snapmark ($CONFIGURATION)…"
+echo "Building Snapmark ($CONFIGURATION, $ARCH)…"
 swift build \
   --configuration "$CONFIGURATION" \
   --product Snapmark \
+  --arch "$ARCH" \
   -Xswiftc -warnings-as-errors
 
-BIN_DIR="$(swift build --configuration "$CONFIGURATION" --show-bin-path)"
+BIN_DIR="$(swift build --configuration "$CONFIGURATION" --arch "$ARCH" --show-bin-path)"
 EXECUTABLE="$BIN_DIR/Snapmark"
 
 if [[ ! -x "$EXECUTABLE" ]]; then
