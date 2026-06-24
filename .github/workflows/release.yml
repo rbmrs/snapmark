@@ -24,11 +24,38 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ github.ref_name }}
         run: |
+          VERSION="${TAG#v}"
+          NOTES_FILE="$(mktemp)"
+          cat > "$NOTES_FILE" <<EOF
+          Snapmark $VERSION
+
+          ## Install
+
+          \`\`\`sh
+          brew install --cask rbmrs/snapmark/snapmark
+          open -a Snapmark
+          \`\`\`
+
+          Homebrew installs a prebuilt app. Xcode and Apple Command Line Tools are not required.
+
+          ## Notes
+
+          - Allow Screen Recording when macOS prompts on first capture.
+          - Snapmark does not require Accessibility permission.
+          - Snapmark is unsigned and not notarized, so macOS may ask you to approve opening it.
+          - Release assets include arm64 and x86_64 app zips, SHA256SUMS.txt, and the generated Homebrew cask.
+
+          ## Maintainer
+
+          Copy snapmark.rb from this release into rbmrs/homebrew-snapmark/Casks/snapmark.rb, commit it, and push the tap.
+          EOF
+
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" dist/release/*.zip dist/release/SHA256SUMS.txt dist/release/snapmark.rb --clobber
+            gh release edit "$TAG" --notes-file "$NOTES_FILE"
           else
             gh release create "$TAG" dist/release/*.zip dist/release/SHA256SUMS.txt dist/release/snapmark.rb \
               --title "$TAG" \
-              --notes "Snapmark $TAG" \
+              --notes-file "$NOTES_FILE" \
               --verify-tag
           fi
