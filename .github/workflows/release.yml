@@ -32,7 +32,8 @@ jobs:
           ## Install
 
           \`\`\`sh
-          brew install --cask rbmrs/snapmark/snapmark
+          brew tap rbmrs/snapmark
+          brew install --cask snapmark
           open -a Snapmark
           \`\`\`
 

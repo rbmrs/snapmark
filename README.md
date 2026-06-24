@@ -9,7 +9,8 @@ Press `⌥⇧4`, click two corners, add rectangles or arrows, then press Return 
 Requires macOS 15.2+ and Homebrew:
 
 ```sh
-brew install --cask rbmrs/snapmark/snapmark
+brew tap rbmrs/snapmark
+brew install --cask snapmark
 open -a Snapmark
 ```
 

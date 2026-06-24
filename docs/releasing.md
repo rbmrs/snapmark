@@ -3,7 +3,8 @@
 Snapmark's public install path is Homebrew Cask:
 
 ```sh
-brew install --cask rbmrs/snapmark/snapmark
+brew tap rbmrs/snapmark
+brew install --cask snapmark
 ```
 
 The cask lives in the project-owned tap `rbmrs/homebrew-snapmark`. The main app
@@ -75,7 +76,7 @@ with Snapmark's stable bundle identifier, so they are not notarized.
    ```sh
    brew tap rbmrs/snapmark
    brew audit --cask --strict --tap=rbmrs/snapmark snapmark
-   brew install --cask rbmrs/snapmark/snapmark
+   brew install --cask snapmark
    open -a Snapmark
    ```
 
