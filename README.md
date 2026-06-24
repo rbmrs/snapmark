@@ -9,16 +9,17 @@ Press `⌥⇧4`, click two corners, add rectangles or arrows, then press Return 
 Requires macOS 15.2+ and Homebrew:
 
 ```sh
-brew tap rbmrs/snapmark
+brew tap rbmrs/snapmark https://github.com/rbmrs/snapmark
+brew trust rbmrs/snapmark
 brew install --cask snapmark
 open -a Snapmark
 ```
 
-Homebrew installs a prebuilt app. Xcode and Apple Command Line Tools are not required.
+Homebrew installs a prebuilt universal app. Xcode and Apple Command Line Tools are not required. `brew trust` is required on Homebrew 6.0+, which refuses to load third-party taps until they are trusted.
 
 Allow Screen Recording when macOS prompts on first capture. Snapmark does not require Accessibility permission.
 
-Snapmark is unsigned and not notarized, so macOS may still ask you to approve opening it.
+Snapmark is unsigned and not notarized; the cask strips the quarantine flag on install so it launches normally.
 
 ## Usage
 
