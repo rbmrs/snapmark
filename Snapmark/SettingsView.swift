@@ -34,13 +34,30 @@ struct SettingsView: View {
                     .foregroundStyle(.red)
             }
 
-            Text("Snapmark requires Screen & System Audio Recording permission to capture the screen. It does not require Accessibility permission.")
+            LabeledContent("Screen Recording") {
+                if model.screenRecordingGranted {
+                    Label("Granted", systemImage: "checkmark.circle.fill")
+                        .foregroundStyle(.green)
+                } else {
+                    Button("Grant…") {
+                        WindowManager.shared.yieldFloating()
+                        model.requestScreenRecording()
+                    }
+                }
+            }
+
+            Text("Snapmark needs Screen Recording permission to capture your screen. It does not record audio or require Accessibility.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
         .formStyle(.grouped)
         .padding()
-        .frame(width: 440)
+        .frame(width: 440, height: 260)
+        .onReceive(
+            NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
+        ) { _ in
+            model.refreshScreenRecording()
+        }
     }
 }
 

@@ -17,6 +17,8 @@
 		A00000000000000000000008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000008 /* SettingsView.swift */; };
 		A00000000000000000000009 /* CaptureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000009 /* CaptureCoordinator.swift */; };
 		A0000000000000000000000A /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000A /* OverlayView.swift */; };
+		A00000000000000000000027 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000027 /* WindowManager.swift */; };
+		A00000000000000000000028 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000028 /* OnboardingView.swift */; };
 		A0000000000000000000000B /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000C /* GeometryTests.swift */; };
 		A0000000000000000000000C /* AnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* AnnotationTests.swift */; };
 		A0000000000000000000000D /* CaptureSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* CaptureSessionTests.swift */; };
@@ -76,6 +78,8 @@
 		B00000000000000000000008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B00000000000000000000009 /* CaptureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureCoordinator.swift; sourceTree = "<group>"; };
 		B0000000000000000000000A /* OverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		B00000000000000000000027 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
+		B00000000000000000000028 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		B0000000000000000000000B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0000000000000000000000C /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000D /* AnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationTests.swift; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 				B00000000000000000000008 /* SettingsView.swift */,
 				B00000000000000000000009 /* CaptureCoordinator.swift */,
 				B0000000000000000000000A /* OverlayView.swift */,
+				B00000000000000000000027 /* WindowManager.swift */,
+				B00000000000000000000028 /* OnboardingView.swift */,
 				B0000000000000000000000B /* Info.plist */,
 				D00000000000000000000008 /* Resources */,
 			);
@@ -339,6 +345,8 @@
 				A00000000000000000000008 /* SettingsView.swift in Sources */,
 				A00000000000000000000009 /* CaptureCoordinator.swift in Sources */,
 				A0000000000000000000000A /* OverlayView.swift in Sources */,
+				A00000000000000000000027 /* WindowManager.swift in Sources */,
+				A00000000000000000000028 /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

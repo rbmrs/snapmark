@@ -1,5 +1,6 @@
 import AppKit
 import Combine
+import CoreGraphics
 import Foundation
 import ServiceManagement
 
@@ -12,10 +13,14 @@ final class AppModel: ObservableObject {
     @Published var hotKeyError: String?
     @Published var launchAtLogin = SMAppService.mainApp.status == .enabled
     @Published var launchAtLoginError: String?
+    @Published var screenRecordingGranted = CGPreflightScreenCaptureAccess()
 
     private let hotKeyManager = HotKeyManager()
     private lazy var captureCoordinator = CaptureCoordinator(model: self)
     private var didStart = false
+
+    private let onboardingKey = "onboarding.completed"
+    private let didRequestScreenCaptureKey = "permissions.didRequestScreenCapture"
 
     private init() {}
 
@@ -64,5 +69,65 @@ final class AppModel: ObservableObject {
             launchAtLogin = SMAppService.mainApp.status == .enabled
             launchAtLoginError = error.localizedDescription
         }
+    }
+
+    // MARK: - Onboarding & permissions
+
+    var hasCompletedOnboarding: Bool {
+        UserDefaults.standard.bool(forKey: onboardingKey)
+    }
+
+    func completeOnboarding() {
+        UserDefaults.standard.set(true, forKey: onboardingKey)
+    }
+
+    /// Re-reads the live Screen Recording status. Granting happens out of process
+    /// (the system prompt or System Settings), so the onboarding view polls this.
+    func refreshScreenRecording() {
+        let granted = CGPreflightScreenCaptureAccess()
+        if granted != screenRecordingGranted {
+            screenRecordingGranted = granted
+        }
+    }
+
+    /// Drives the Screen Recording grant flow: the first request shows the system
+    /// prompt; afterwards we send the user to the System Settings pane, since
+    /// macOS only presents the prompt once.
+    func requestScreenRecording() {
+        if CGPreflightScreenCaptureAccess() {
+            screenRecordingGranted = true
+            return
+        }
+
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: didRequestScreenCaptureKey) {
+            openScreenRecordingSettings()
+        } else {
+            defaults.set(true, forKey: didRequestScreenCaptureKey)
+            _ = CGRequestScreenCaptureAccess()
+        }
+    }
+
+    func openScreenRecordingSettings() {
+        guard let url = URL(
+            string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture"
+        ) else { return }
+        NSWorkspace.shared.open(url)
+    }
+
+    /// Relaunches Snapmark. ScreenCaptureKit reads a process-cached Screen
+    /// Recording status, so after the user grants access a restart is the
+    /// reliable way to pick it up. Waits for this instance to exit, then reopens.
+    func relaunch() {
+        let path = Bundle.main.bundlePath
+        let pid = String(ProcessInfo.processInfo.processIdentifier)
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/bin/sh")
+        task.arguments = [
+            "-c",
+            "while /bin/kill -0 \(pid) >/dev/null 2>&1; do /bin/sleep 0.2; done; /usr/bin/open \"\(path)\""
+        ]
+        try? task.run()
+        NSApp.terminate(nil)
     }
 }

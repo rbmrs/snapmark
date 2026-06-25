@@ -16,9 +16,10 @@ struct SnapmarkApp: App {
 
             Divider()
 
-            SettingsLink {
-                Text("Settings…")
+            Button("Settings…") {
+                WindowManager.shared.showSettings(model: model)
             }
+            .keyboardShortcut(",", modifiers: .command)
 
             Divider()
 
@@ -27,16 +28,16 @@ struct SnapmarkApp: App {
             }
             .keyboardShortcut("q")
         }
-
-        Settings {
-            SettingsView(model: model)
-        }
     }
 }
 
 final class SnapmarkAppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         NSApplication.shared.setActivationPolicy(.accessory)
-        AppModel.shared.start()
+        let model = AppModel.shared
+        model.start()
+        if !model.hasCompletedOnboarding {
+            WindowManager.shared.showOnboarding(model: model)
+        }
     }
 }
