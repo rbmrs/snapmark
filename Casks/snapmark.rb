@@ -9,8 +9,8 @@
 # not `homebrew-snapmark`. See https://docs.brew.sh/Taps.
 
 cask "snapmark" do
-  version "1.0.4"
-  sha256 "9917a7bc0cd05d2c92594fc43baf9d5a0b58934ac09f62255607b95851aa3ed8"
+  version "1.0.5"
+  sha256 "6398e0def2c44b8528e0180e476e1122a249e9189497a4abea8e613394a4e5bb"
 
   url "https://github.com/rbmrs/snapmark/releases/download/v#{version}/Snapmark-#{version}.zip"
   name "Snapmark"
