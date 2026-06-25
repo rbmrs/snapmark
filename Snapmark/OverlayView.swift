@@ -47,6 +47,11 @@ final class OverlayView: NSView {
 
     override var acceptsFirstResponder: Bool { true }
 
+    // The overlay activates the app when it appears. Without this, macOS swallows
+    // the first click just to make the window key, so the user would have to click
+    // once to focus and again to set the first corner.
+    override func acceptsFirstMouse(for event: NSEvent?) -> Bool { true }
+
     override func updateTrackingAreas() {
         super.updateTrackingAreas()
         if let trackingAreaReference {
@@ -67,6 +72,8 @@ final class OverlayView: NSView {
 
         switch session.phase {
         case .choosingFirstCorner:
+            NSColor.black.withAlphaComponent(0.5).setFill()
+            bounds.fill()
             drawSelectionInstructions("Click the first corner")
         case .choosingSecondCorner:
             drawSelectionPreview()
