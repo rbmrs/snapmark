@@ -8,10 +8,12 @@ struct SnapmarkApp: App {
 
     var body: some Scene {
         MenuBarExtra("Snapmark", systemImage: "viewfinder") {
-            Button("Capture Area") {
+            // The shortcut is shown in the title (not as a .keyboardShortcut) so
+            // it always reflects the configured global hotkey, and so it can't
+            // shadow the hotkey recorder while a new shortcut is being typed.
+            Button("Capture Area  \(model.hotKey.displayString)") {
                 model.startCapture()
             }
-            .keyboardShortcut("4", modifiers: [.option, .shift])
             .disabled(model.isCapturing)
 
             Divider()

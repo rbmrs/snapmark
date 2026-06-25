@@ -126,6 +126,12 @@ final class HotKeyManager {
         }
     }
 
+    /// Temporarily removes the global hotkey — used while the user is typing a
+    /// new shortcut so pressing the current one is recorded, not fired.
+    func suspend() {
+        unregister()
+    }
+
     private func unregister() {
         if let hotKeyRef {
             UnregisterEventHotKey(hotKeyRef)

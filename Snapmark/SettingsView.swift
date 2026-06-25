@@ -8,9 +8,12 @@ struct SettingsView: View {
     var body: some View {
         Form {
             LabeledContent("Capture shortcut") {
-                HotKeyRecorder(hotKey: model.hotKey) { hotKey in
-                    model.applyHotKey(hotKey)
-                }
+                HotKeyRecorder(
+                    hotKey: model.hotKey,
+                    onChange: { model.applyHotKey($0) },
+                    onBeginRecording: { model.suspendHotKey() },
+                    onEndRecording: { model.resumeHotKey() }
+                )
                 .frame(width: 150, height: 28)
             }
 
@@ -64,22 +67,30 @@ struct SettingsView: View {
 struct HotKeyRecorder: NSViewRepresentable {
     let hotKey: HotKey
     let onChange: (HotKey) -> Void
+    let onBeginRecording: () -> Void
+    let onEndRecording: () -> Void
 
     func makeNSView(context: Context) -> HotKeyRecorderView {
         let view = HotKeyRecorderView()
         view.onChange = onChange
+        view.onBeginRecording = onBeginRecording
+        view.onEndRecording = onEndRecording
         view.hotKey = hotKey
         return view
     }
 
     func updateNSView(_ nsView: HotKeyRecorderView, context: Context) {
         nsView.onChange = onChange
+        nsView.onBeginRecording = onBeginRecording
+        nsView.onEndRecording = onEndRecording
         nsView.hotKey = hotKey
     }
 }
 
 final class HotKeyRecorderView: NSView {
     var onChange: ((HotKey) -> Void)?
+    var onBeginRecording: (() -> Void)?
+    var onEndRecording: (() -> Void)?
     var hotKey: HotKey = .defaultValue {
         didSet { needsDisplay = true }
     }
@@ -88,7 +99,9 @@ final class HotKeyRecorderView: NSView {
     override var acceptsFirstResponder: Bool { true }
 
     override func mouseDown(with event: NSEvent) {
+        guard !isRecording else { return }
         isRecording = true
+        onBeginRecording?()
         window?.makeFirstResponder(self)
         needsDisplay = true
     }
@@ -99,8 +112,7 @@ final class HotKeyRecorderView: NSView {
             return
         }
         if event.keyCode == UInt16(kVK_Escape) {
-            isRecording = false
-            needsDisplay = true
+            endRecording()
             return
         }
 
@@ -111,15 +123,22 @@ final class HotKeyRecorderView: NSView {
         if modifiers.contains(.control) { carbonModifiers |= UInt32(controlKey) }
         if modifiers.contains(.shift) { carbonModifiers |= UInt32(shiftKey) }
 
+        // Apply the new shortcut first, then end recording (which re-registers
+        // whatever the current hotkey is now).
         onChange?(HotKey(keyCode: UInt32(event.keyCode), modifiers: carbonModifiers))
-        isRecording = false
-        needsDisplay = true
+        endRecording()
     }
 
     override func resignFirstResponder() -> Bool {
-        isRecording = false
-        needsDisplay = true
+        if isRecording { endRecording() }
         return super.resignFirstResponder()
+    }
+
+    private func endRecording() {
+        guard isRecording else { return }
+        isRecording = false
+        onEndRecording?()
+        needsDisplay = true
     }
 
     override func draw(_ dirtyRect: NSRect) {

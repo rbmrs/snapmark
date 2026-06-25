@@ -56,6 +56,20 @@ final class AppModel: ObservableObject {
         }
     }
 
+    /// Called when the shortcut recorder starts capturing keystrokes: drop the
+    /// global hotkey so the user can re-enter the current shortcut without
+    /// triggering a capture.
+    func suspendHotKey() {
+        hotKeyManager.suspend()
+    }
+
+    /// Called when recording ends. Re-registers the current shortcut — which is
+    /// the newly chosen one after a successful change, or the previous one if the
+    /// user cancelled or the new shortcut couldn't be registered.
+    func resumeHotKey() {
+        try? hotKeyManager.register(hotKey)
+    }
+
     func setLaunchAtLogin(_ enabled: Bool) {
         do {
             if enabled {
