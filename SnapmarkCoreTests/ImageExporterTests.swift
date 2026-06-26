@@ -36,6 +36,17 @@ final class ImageExporterTests: XCTestCase {
         XCTAssertFalse(try ImageExporter.pngData(from: output).isEmpty)
     }
 
+    func testWriteToPasteboardProducesSingleImageItem() throws {
+        let image = try makeImage(width: 20, height: 20, color: .white)
+        try ImageExporter.writeToPasteboard(image)
+
+        // Regression: the image must land on the clipboard as ONE item.
+        // Two items made chat apps paste and send the screenshot twice.
+        let items = try XCTUnwrap(NSPasteboard.general.pasteboardItems)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertNotNil(items.first?.data(forType: .png))
+    }
+
     private func makeImage(width: Int, height: Int, color: NSColor) throws -> CGImage {
         let context = try XCTUnwrap(
             CGContext(

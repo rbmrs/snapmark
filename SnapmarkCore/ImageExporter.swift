@@ -77,11 +77,25 @@ public enum ImageExporter {
     }
 
     public static func writeToPasteboard(_ image: CGImage) throws {
-        let data = try pngData(from: image)
+        let representation = NSBitmapImageRep(cgImage: image)
+        guard let png = representation.representation(using: .png, properties: [:]) else {
+            throw ImageExporterError.unableToEncodePNG
+        }
+
+        // Put the image on the pasteboard as a SINGLE item that offers both PNG
+        // and TIFF. Mixing setData(_:forType:) with writeObjects([NSImage]) used
+        // to create two separate pasteboard items, so apps that support
+        // multi-image paste (chat clients) pasted the screenshot twice and sent
+        // two messages.
+        let item = NSPasteboardItem()
+        item.setData(png, forType: .png)
+        if let tiff = representation.tiffRepresentation {
+            item.setData(tiff, forType: .tiff)
+        }
+
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
-        pasteboard.setData(data, forType: .png)
-        pasteboard.writeObjects([NSImage(cgImage: image, size: .zero)])
+        pasteboard.writeObjects([item])
     }
 
     private static func draw(

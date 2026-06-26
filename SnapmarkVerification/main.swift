@@ -75,4 +75,11 @@ require(output.width == 60 && output.height == 40, "Retina export dimensions")
 let pngData = try ImageExporter.pngData(from: output)
 require(!pngData.isEmpty, "PNG encoding")
 
+// Regression: the screenshot must land on the clipboard as a SINGLE item.
+// Two items made chat apps paste and send the screenshot twice.
+try ImageExporter.writeToPasteboard(output)
+let pasteboardItems = NSPasteboard.general.pasteboardItems ?? []
+require(pasteboardItems.count == 1, "single pasteboard item")
+require(pasteboardItems.first?.data(forType: .png) != nil, "pasteboard PNG data")
+
 print("Snapmark verification passed")
