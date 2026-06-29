@@ -1,6 +1,7 @@
 import AppKit
 import CoreGraphics
 import Foundation
+import ImageIO
 import SnapmarkCore
 import ScreenCaptureKit
 
@@ -106,6 +107,15 @@ final class CaptureCoordinator {
     }
 
     private func captureAllDisplays() async throws -> [CapturedDisplay] {
+        switch model.areaCaptureEngine {
+        case .screenCaptureKit:
+            return try await captureAllDisplaysWithScreenCaptureKit()
+        case .screencapture:
+            return try captureAllDisplaysWithScreencapture()
+        }
+    }
+
+    private func captureAllDisplaysWithScreenCaptureKit() async throws -> [CapturedDisplay] {
         let content = try await shareableContent()
         let screensByID: [CGDirectDisplayID: NSScreen] = Dictionary(
             uniqueKeysWithValues: NSScreen.screens.compactMap { screen in
@@ -132,6 +142,50 @@ final class CaptureCoordinator {
             captures.append(CapturedDisplay(screen: screen, image: image))
         }
         return captures
+    }
+
+    private func captureAllDisplaysWithScreencapture() throws -> [CapturedDisplay] {
+        let screens = NSScreen.screens
+        guard !screens.isEmpty else { return [] }
+
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("snapmark-screencapture-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+
+        var captures: [CapturedDisplay] = []
+        for (index, screen) in screens.enumerated() {
+            let url = directory.appendingPathComponent("display-\(index + 1).png")
+            try runScreencapture(displayIndex: index + 1, outputURL: url)
+            guard let image = loadCGImage(from: url) else {
+                throw CaptureError.unableToLoadScreencapture(url.path)
+            }
+            captures.append(CapturedDisplay(screen: screen, image: image))
+        }
+        return captures
+    }
+
+    private func runScreencapture(displayIndex: Int, outputURL: URL) throws {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/sbin/screencapture")
+        process.arguments = [
+            "-x",
+            "-t", "png",
+            "-D\(displayIndex)",
+            outputURL.path
+        ]
+        try process.run()
+        process.waitUntilExit()
+        guard process.terminationStatus == 0 else {
+            throw CaptureError.screencaptureFailed(process.terminationStatus)
+        }
+    }
+
+    private func loadCGImage(from url: URL) -> CGImage? {
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+            return nil
+        }
+        return CGImageSourceCreateImageAtIndex(source, 0, nil)
     }
 
     private func shareableContent() async throws -> SCShareableContent {
@@ -205,9 +259,18 @@ final class CaptureCoordinator {
 
 enum CaptureError: LocalizedError {
     case noDisplays
+    case screencaptureFailed(Int32)
+    case unableToLoadScreencapture(String)
 
     var errorDescription: String? {
-        "No capturable displays were found."
+        switch self {
+        case .noDisplays:
+            return "No capturable displays were found."
+        case .screencaptureFailed(let status):
+            return "The system screencapture command failed (exit \(status))."
+        case .unableToLoadScreencapture(let path):
+            return "The system screencapture image could not be loaded at \(path)."
+        }
     }
 }
 
