@@ -4,6 +4,36 @@ import CoreGraphics
 import Foundation
 import ServiceManagement
 
+enum AreaCaptureEngine: String, CaseIterable, Identifiable {
+    case screenCaptureKit
+    case screencapture
+
+    private static let defaultsKey = "areaCapture.engine"
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .screenCaptureKit:
+            return "ScreenCaptureKit (current)"
+        case .screencapture:
+            return "System screencapture"
+        }
+    }
+
+    static func load(defaults: UserDefaults = .standard) -> AreaCaptureEngine {
+        guard let rawValue = defaults.string(forKey: defaultsKey),
+              let engine = AreaCaptureEngine(rawValue: rawValue) else {
+            return .screenCaptureKit
+        }
+        return engine
+    }
+
+    func save(defaults: UserDefaults = .standard) {
+        defaults.set(rawValue, forKey: Self.defaultsKey)
+    }
+}
+
 @MainActor
 final class AppModel: ObservableObject {
     static let shared = AppModel()
@@ -14,6 +44,7 @@ final class AppModel: ObservableObject {
     @Published var launchAtLogin = SMAppService.mainApp.status == .enabled
     @Published var launchAtLoginError: String?
     @Published var screenRecordingGranted = CGPreflightScreenCaptureAccess()
+    @Published var areaCaptureEngine = AreaCaptureEngine.load()
 
     private let hotKeyManager = HotKeyManager()
     private lazy var captureCoordinator = CaptureCoordinator(model: self)
@@ -85,6 +116,11 @@ final class AppModel: ObservableObject {
         }
     }
 
+    func setAreaCaptureEngine(_ engine: AreaCaptureEngine) {
+        areaCaptureEngine = engine
+        engine.save()
+    }
+
     // MARK: - Onboarding & permissions
 
     var hasCompletedOnboarding: Bool {
@@ -133,13 +169,20 @@ final class AppModel: ObservableObject {
     /// Recording status, so after the user grants access a restart is the
     /// reliable way to pick it up. Waits for this instance to exit, then reopens.
     func relaunch() {
-        let path = Bundle.main.bundlePath
+        let bundlePath = Bundle.main.bundlePath
+        let executablePath = Bundle.main.executablePath ?? CommandLine.arguments[0]
         let pid = String(ProcessInfo.processInfo.processIdentifier)
         let task = Process()
         task.executableURL = URL(fileURLWithPath: "/bin/sh")
         task.arguments = [
             "-c",
-            "while /bin/kill -0 \(pid) >/dev/null 2>&1; do /bin/sleep 0.2; done; /usr/bin/open \"\(path)\""
+            """
+            while /bin/kill -0 \(pid) >/dev/null 2>&1; do /bin/sleep 0.2; done
+            case "\(bundlePath)" in
+              *.app) /usr/bin/open "\(bundlePath)" ;;
+              *) /usr/bin/nohup "\(executablePath)" >/dev/null 2>&1 & ;;
+            esac
+            """
         ]
         try? task.run()
         NSApp.terminate(nil)
