@@ -4,36 +4,6 @@ import CoreGraphics
 import Foundation
 import ServiceManagement
 
-enum AreaCaptureEngine: String, CaseIterable, Identifiable {
-    case screenCaptureKit
-    case screencapture
-
-    private static let defaultsKey = "areaCapture.engine"
-
-    var id: String { rawValue }
-
-    var displayName: String {
-        switch self {
-        case .screenCaptureKit:
-            return "ScreenCaptureKit (current)"
-        case .screencapture:
-            return "System screencapture"
-        }
-    }
-
-    static func load(defaults: UserDefaults = .standard) -> AreaCaptureEngine {
-        guard let rawValue = defaults.string(forKey: defaultsKey),
-              let engine = AreaCaptureEngine(rawValue: rawValue) else {
-            return .screenCaptureKit
-        }
-        return engine
-    }
-
-    func save(defaults: UserDefaults = .standard) {
-        defaults.set(rawValue, forKey: Self.defaultsKey)
-    }
-}
-
 @MainActor
 final class AppModel: ObservableObject {
     static let shared = AppModel()
@@ -44,7 +14,6 @@ final class AppModel: ObservableObject {
     @Published var launchAtLogin = SMAppService.mainApp.status == .enabled
     @Published var launchAtLoginError: String?
     @Published var screenRecordingGranted = CGPreflightScreenCaptureAccess()
-    @Published var areaCaptureEngine = AreaCaptureEngine.load()
 
     private let hotKeyManager = HotKeyManager()
     private lazy var captureCoordinator = CaptureCoordinator(model: self)
@@ -114,11 +83,6 @@ final class AppModel: ObservableObject {
             launchAtLogin = SMAppService.mainApp.status == .enabled
             launchAtLoginError = error.localizedDescription
         }
-    }
-
-    func setAreaCaptureEngine(_ engine: AreaCaptureEngine) {
-        areaCaptureEngine = engine
-        engine.save()
     }
 
     // MARK: - Onboarding & permissions

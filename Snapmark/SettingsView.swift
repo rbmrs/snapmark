@@ -37,23 +37,6 @@ struct SettingsView: View {
                     .foregroundStyle(.red)
             }
 
-            LabeledContent("Area capture") {
-                Picker(
-                    "",
-                    selection: Binding(
-                        get: { model.areaCaptureEngine },
-                        set: { model.setAreaCaptureEngine($0) }
-                    )
-                ) {
-                    ForEach(AreaCaptureEngine.allCases) { engine in
-                        Text(engine.displayName).tag(engine)
-                    }
-                }
-                .labelsHidden()
-                .pickerStyle(.menu)
-                .frame(width: 210)
-            }
-
             LabeledContent("Screen Recording") {
                 if model.screenRecordingGranted {
                     Label("Granted", systemImage: "checkmark.circle.fill")
@@ -77,7 +60,7 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .padding()
-        .frame(width: 440, height: 310)
+        .frame(width: 440, height: 270)
         .onReceive(
             NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
         ) { _ in
