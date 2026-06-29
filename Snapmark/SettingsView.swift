@@ -37,25 +37,47 @@ struct SettingsView: View {
                     .foregroundStyle(.red)
             }
 
+            LabeledContent("Area capture") {
+                Picker(
+                    "",
+                    selection: Binding(
+                        get: { model.areaCaptureEngine },
+                        set: { model.setAreaCaptureEngine($0) }
+                    )
+                ) {
+                    ForEach(AreaCaptureEngine.allCases) { engine in
+                        Text(engine.displayName).tag(engine)
+                    }
+                }
+                .labelsHidden()
+                .pickerStyle(.menu)
+                .frame(width: 210)
+            }
+
             LabeledContent("Screen Recording") {
                 if model.screenRecordingGranted {
                     Label("Granted", systemImage: "checkmark.circle.fill")
                         .foregroundStyle(.green)
                 } else {
-                    Button("Grant…") {
-                        WindowManager.shared.yieldFloating()
-                        model.requestScreenRecording()
+                    HStack(spacing: 8) {
+                        Button("Open Settings…") {
+                            WindowManager.shared.yieldFloating()
+                            model.openScreenRecordingSettings()
+                        }
+                        Button("Quit & Reopen") {
+                            model.relaunch()
+                        }
                     }
                 }
             }
 
-            Text("Snapmark needs Screen Recording permission to capture your screen. It does not record audio or require Accessibility.")
+            Text("Snapmark needs Screen Recording permission to capture your screen. After changing this permission in System Settings, quit and reopen Snapmark. It does not record audio or require Accessibility.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
         .formStyle(.grouped)
         .padding()
-        .frame(width: 440, height: 260)
+        .frame(width: 440, height: 310)
         .onReceive(
             NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
         ) { _ in
