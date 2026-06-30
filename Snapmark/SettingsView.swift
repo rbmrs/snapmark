@@ -39,8 +39,14 @@ struct SettingsView: View {
 
             LabeledContent("Screen Recording") {
                 if model.screenRecordingGranted {
-                    Label("Granted", systemImage: "checkmark.circle.fill")
-                        .foregroundStyle(.green)
+                    HStack(spacing: 8) {
+                        Label("Granted", systemImage: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                        Button("Open Settings…") {
+                            WindowManager.shared.yieldFloating()
+                            model.openScreenRecordingSettings()
+                        }
+                    }
                 } else {
                     HStack(spacing: 8) {
                         Button("Open Settings…") {
