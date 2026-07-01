@@ -14,10 +14,13 @@ final class AppModel: ObservableObject {
     @Published var launchAtLogin = SMAppService.mainApp.status == .enabled
     @Published var launchAtLoginError: String?
     @Published var screenRecordingGranted = CGPreflightScreenCaptureAccess()
+    @Published private(set) var updateStatusMessage: String?
 
     private let hotKeyManager = HotKeyManager()
     private lazy var captureCoordinator = CaptureCoordinator(model: self)
     private var didStart = false
+    private var pendingRelaunch = false
+    private let updateCheckInterval: TimeInterval = 86_400
 
     private let onboardingKey = "onboarding.completed"
     private let didRequestScreenCaptureKey = "permissions.didRequestScreenCapture"
@@ -33,6 +36,12 @@ final class AppModel: ObservableObject {
             }
         }
         applyHotKey(hotKey)
+        checkForUpdates()
+        Timer.scheduledTimer(withTimeInterval: updateCheckInterval, repeats: true) { [weak self] _ in
+            Task { @MainActor in
+                self?.checkForUpdates()
+            }
+        }
     }
 
     func startCapture() {
@@ -43,6 +52,9 @@ final class AppModel: ObservableObject {
 
     func captureDidFinish() {
         isCapturing = false
+        if pendingRelaunch {
+            relaunch()
+        }
     }
 
     func applyHotKey(_ candidate: HotKey) {
@@ -150,5 +162,67 @@ final class AppModel: ObservableObject {
         ]
         try? task.run()
         NSApp.terminate(nil)
+    }
+
+    // MARK: - Updates
+
+    /// Checks Homebrew for a newer cask version and installs it if found, then
+    /// relaunches — deferring the relaunch until the current capture finishes if
+    /// one is in progress, since restarting mid-annotation would drop it.
+    func checkForUpdates() {
+        updateStatusMessage = "Checking for updates…"
+        Task.detached(priority: .utility) {
+            guard let brew = AppModel.brewExecutablePath() else {
+                await MainActor.run { AppModel.shared.updateStatusMessage = "Homebrew not found." }
+                return
+            }
+            _ = AppModel.runShell("\"\(brew)\" update --quiet")
+            let outdated = AppModel.runShell("\"\(brew)\" outdated --cask snapmark")
+            let isOutdated = !outdated.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            if isOutdated {
+                _ = AppModel.runShell("\"\(brew)\" upgrade --cask snapmark --quiet")
+            }
+            await MainActor.run {
+                AppModel.shared.finishUpdateCheck(isOutdated: isOutdated)
+            }
+        }
+    }
+
+    private func finishUpdateCheck(isOutdated: Bool) {
+        guard isOutdated else {
+            updateStatusMessage = "Snapmark is up to date."
+            return
+        }
+        updateStatusMessage = "Update installed — relaunching…"
+        if isCapturing {
+            pendingRelaunch = true
+        } else {
+            relaunch()
+        }
+    }
+
+    /// GUI apps don't inherit the shell's PATH, so probe Homebrew's two standard
+    /// install locations directly.
+    nonisolated private static func brewExecutablePath() -> String? {
+        ["/opt/homebrew/bin/brew", "/usr/local/bin/brew"].first {
+            FileManager.default.isExecutableFile(atPath: $0)
+        }
+    }
+
+    nonisolated private static func runShell(_ command: String) -> String {
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/bin/sh")
+        task.arguments = ["-c", command]
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = FileHandle.nullDevice
+        do {
+            try task.run()
+        } catch {
+            return ""
+        }
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        task.waitUntilExit()
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }
