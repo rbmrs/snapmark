@@ -43,15 +43,16 @@ struct SettingsView: View {
             }
 
             LabeledContent("Updates") {
-                Button("Check for Updates…") {
-                    model.checkForUpdates()
+                HStack(spacing: 8) {
+                    if let message = model.updateStatusMessage {
+                        Text(message)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Button("Check for Updates…") {
+                        model.checkForUpdates()
+                    }
                 }
-            }
-
-            if let message = model.updateStatusMessage {
-                Text(message)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
 
             LabeledContent("Screen Recording") {
@@ -77,13 +78,14 @@ struct SettingsView: View {
                 }
             }
 
-            Text("Snapmark needs Screen Recording permission to capture your screen. After changing this permission in System Settings, quit and reopen Snapmark. It does not record audio or require Accessibility.")
+            Text("Captures your screen only — no audio or Accessibility access. Restart Snapmark after changing this permission.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
         .formStyle(.grouped)
+        .fixedSize(horizontal: false, vertical: true)
         .padding()
-        .frame(width: 440, height: 350)
+        .frame(width: 440)
         .onReceive(
             NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
         ) { _ in
@@ -112,6 +114,10 @@ struct HotKeyRecorder: NSViewRepresentable {
         nsView.onBeginRecording = onBeginRecording
         nsView.onEndRecording = onEndRecording
         nsView.hotKey = hotKey
+    }
+
+    func sizeThatFits(_ proposal: ProposedViewSize, nsView: HotKeyRecorderView, context: Context) -> CGSize? {
+        CGSize(width: 150, height: 28)
     }
 }
 
