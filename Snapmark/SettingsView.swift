@@ -37,6 +37,23 @@ struct SettingsView: View {
                     .foregroundStyle(.red)
             }
 
+            LabeledContent("Version") {
+                Text(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "—")
+                    .foregroundStyle(.secondary)
+            }
+
+            LabeledContent("Updates") {
+                Button("Check for Updates…") {
+                    model.checkForUpdates()
+                }
+            }
+
+            if let message = model.updateStatusMessage {
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
             LabeledContent("Screen Recording") {
                 if model.screenRecordingGranted {
                     HStack(spacing: 8) {
@@ -66,7 +83,7 @@ struct SettingsView: View {
         }
         .formStyle(.grouped)
         .padding()
-        .frame(width: 440, height: 270)
+        .frame(width: 440, height: 350)
         .onReceive(
             NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)
         ) { _ in
