@@ -143,9 +143,13 @@ final class CaptureCoordinator {
 
     @available(macOS 15.2, *)
     private func captureAllDisplaysWithScreenCaptureKitRects() async throws -> [CapturedDisplay] {
+        let primaryHeight = NSScreen.screens.first(where: { $0.frame.origin == .zero })?.frame.height
+            ?? NSScreen.screens.first?.frame.height
+            ?? 0
         var captures: [CapturedDisplay] = []
         for screen in NSScreen.screens {
-            guard let image = try await captureImage(in: screen.frame) else {
+            let rect = Geometry.cgDisplayRect(appKitFrame: screen.frame, primaryHeight: primaryHeight)
+            guard let image = try await captureImage(in: rect) else {
                 continue
             }
             captures.append(CapturedDisplay(screen: screen, image: image))
