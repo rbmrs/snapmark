@@ -38,6 +38,26 @@ final class GeometryTests: XCTestCase {
         XCTAssertEqual(rect, CGRect(x: 50, y: 75, width: 100, height: 150))
     }
 
+    func testCGDisplayRectLeavesPrimaryUnchanged() {
+        let rect = Geometry.cgDisplayRect(
+            appKitFrame: CGRect(x: 0, y: 0, width: 1920, height: 1080),
+            primaryHeight: 1080
+        )
+
+        XCTAssertEqual(rect, CGRect(x: 0, y: 0, width: 1920, height: 1080))
+    }
+
+    func testCGDisplayRectFlipsShorterSecondaryToRightOfTallerPrimary() {
+        // Primary is 1440 tall; a 900-tall display sits to its right, bottom-aligned
+        // in AppKit coords (origin y = 0). Its top must map below the primary's top.
+        let rect = Geometry.cgDisplayRect(
+            appKitFrame: CGRect(x: 2560, y: 0, width: 1440, height: 900),
+            primaryHeight: 1440
+        )
+
+        XCTAssertEqual(rect, CGRect(x: 2560, y: 540, width: 1440, height: 900))
+    }
+
     func testToolbarIsPlacedAboveSelectionWhenThereIsRoom() {
         let frame = Geometry.floatingToolbarFrame(
             selection: CGRect(x: 200, y: 200, width: 300, height: 200),

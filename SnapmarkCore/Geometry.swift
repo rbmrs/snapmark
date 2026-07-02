@@ -38,6 +38,18 @@ public enum Geometry {
         return hypot(point.x - closest.x, point.y - closest.y)
     }
 
+    /// AppKit screen frame (origin bottom-left of primary, y-up) → CoreGraphics
+    /// global display rect (origin top-left of primary, y-down), which is what
+    /// SCScreenshotManager.captureImage(in:) expects.
+    public static func cgDisplayRect(appKitFrame frame: CGRect, primaryHeight: CGFloat) -> CGRect {
+        CGRect(
+            x: frame.origin.x,
+            y: primaryHeight - frame.origin.y - frame.height,
+            width: frame.width,
+            height: frame.height
+        )
+    }
+
     public static func pixelCropRect(
         pointRect: CGRect,
         imageSize: CGSize,
