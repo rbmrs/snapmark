@@ -10,7 +10,7 @@
 
 cask "snapmark" do
   version "1.0.9"
-  sha256 "d91c236db4e16cc69898ce69245ab56c0266e6b22904d0f6b3e454861e7b1e11"
+  sha256 "fb39e0a5bfed471afb348f8386162a71e9f803cb74da5a83315064e7251240c8"
 
   url "https://github.com/rbmrs/snapmark/releases/download/v#{version}/Snapmark-#{version}.zip"
   name "Snapmark"
