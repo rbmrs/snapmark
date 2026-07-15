@@ -72,6 +72,8 @@ final class CaptureCoordinator {
                 annotations: overlay.session.annotations
             )
             try ImageExporter.writeToPasteboard(image)
+            let pngData = try ImageExporter.pngData(from: image)
+            model.saveToHistory(pngData: pngData)
             finishSession()
         } catch {
             showCaptureError(error)

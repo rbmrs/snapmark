@@ -76,6 +76,17 @@ public enum ImageExporter {
         return data
     }
 
+    public static func writeToPasteboard(pngData: Data) {
+        let item = NSPasteboardItem()
+        item.setData(pngData, forType: .png)
+        if let image = NSImage(data: pngData), let tiff = image.tiffRepresentation {
+            item.setData(tiff, forType: .tiff)
+        }
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.writeObjects([item])
+    }
+
     public static func writeToPasteboard(_ image: CGImage) throws {
         let representation = NSBitmapImageRep(cgImage: image)
         guard let png = representation.representation(using: .png, properties: [:]) else {

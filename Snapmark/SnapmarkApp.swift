@@ -16,6 +16,34 @@ struct SnapmarkApp: App {
             }
             .disabled(model.isCapturing)
 
+            if !model.historyManager.entries.isEmpty {
+                Menu("History") {
+                    ForEach(model.historyManager.entries) { entry in
+                        Button {
+                            model.copyFromHistory(id: entry.id)
+                        } label: {
+                            HStack(spacing: 8) {
+                                if let thumbData = model.historyManager.thumbnailData(for: entry.id),
+                                   let nsImage = NSImage(data: thumbData) {
+                                    Image(nsImage: nsImage)
+                                        .resizable()
+                                        .frame(width: 32, height: 20)
+                                }
+                                Text(entry.date.formatted(date: .omitted, time: .shortened))
+                                if model.lastCopiedFromHistoryID == entry.id {
+                                    Image(systemName: "checkmark")
+                                        .foregroundStyle(.green)
+                                }
+                            }
+                        }
+                    }
+                    Divider()
+                    Button("Clear History") {
+                        model.clearHistory()
+                    }
+                }
+            }
+
             Divider()
 
             Button("Settings…") {

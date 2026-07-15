@@ -3,6 +3,7 @@ import Combine
 import CoreGraphics
 import Foundation
 import ServiceManagement
+import SnapmarkCore
 
 @MainActor
 final class AppModel: ObservableObject {
@@ -15,6 +16,9 @@ final class AppModel: ObservableObject {
     @Published var launchAtLoginError: String?
     @Published var screenRecordingGranted = CGPreflightScreenCaptureAccess()
     @Published private(set) var updateStatusMessage: String?
+
+    let historyManager = HistoryManager()
+    @Published private(set) var lastCopiedFromHistoryID: UUID?
 
     private let hotKeyManager = HotKeyManager()
     private lazy var captureCoordinator = CaptureCoordinator(model: self)
@@ -95,6 +99,30 @@ final class AppModel: ObservableObject {
             launchAtLogin = SMAppService.mainApp.status == .enabled
             launchAtLoginError = error.localizedDescription
         }
+    }
+
+    // MARK: - History
+
+    func saveToHistory(pngData: Data) {
+        try? historyManager.addEntry(pngData: pngData)
+        objectWillChange.send()
+    }
+
+    func clearHistory() {
+        historyManager.clearAll()
+        objectWillChange.send()
+    }
+
+    func copyFromHistory(id: UUID) {
+        guard let pngData = historyManager.fullImageData(for: id) else { return }
+        ImageExporter.writeToPasteboard(pngData: pngData)
+        lastCopiedFromHistoryID = id
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            if self?.lastCopiedFromHistoryID == id {
+                self?.lastCopiedFromHistoryID = nil
+            }
+        }
+        objectWillChange.send()
     }
 
     // MARK: - Onboarding & permissions

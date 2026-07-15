@@ -55,6 +55,19 @@ struct SettingsView: View {
                 }
             }
 
+            LabeledContent("History") {
+                HStack(spacing: 8) {
+                    Text("\(model.historyManager.entries.count) screenshot\(model.historyManager.entries.count == 1 ? "" : "s")")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    if !model.historyManager.entries.isEmpty {
+                        Button("Clear History") {
+                            model.clearHistory()
+                        }
+                    }
+                }
+            }
+
             LabeledContent("Screen Recording") {
                 if model.screenRecordingGranted {
                     HStack(spacing: 8) {
