@@ -42,15 +42,33 @@ struct SettingsView: View {
                     .foregroundStyle(.secondary)
             }
 
+            // Installing and relaunching are separate, explicitly clicked steps:
+            // the app never swaps itself out from under the user.
             LabeledContent("Updates") {
-                HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 6) {
                     if let message = model.updateStatusMessage {
                         Text(message)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
-                    Button("Check for Updates…") {
-                        model.checkForUpdates()
+                    HStack(spacing: 8) {
+                        Button("Check for Updates…") {
+                            model.checkForUpdates()
+                        }
+                        .disabled(model.isCheckingForUpdates || model.isInstallingUpdate)
+
+                        if model.updateAvailable {
+                            Button("Install Update") {
+                                model.installUpdate()
+                            }
+                            .disabled(model.isInstallingUpdate)
+                        }
+
+                        if model.updateReadyToRelaunch {
+                            Button("Relaunch Now") {
+                                model.relaunchAfterUpdate()
+                            }
+                        }
                     }
                 }
             }
