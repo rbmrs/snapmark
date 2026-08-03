@@ -5,13 +5,21 @@ Findings from the 2026-08-02 code review, plus the ChromeOS/Crostini port study
 cited code and re-tested the ChromeOS environment; their corrections are folded
 in below. Ordered by impact.
 
-> **Status 2026-08-02:** everything in *Do first* and *Worth doing* is
-> implemented **but unverified** — there is no Swift toolchain on the dev
-> machine (Crostini/Linux; `swiftlang` isn't installed and `Package.swift`
-> requires tools 6.1 vs Debian's 6.0.3). Nothing below was compiled or run.
-> The new CI workflow is what will actually check it — **watch the first CI
-> run** before trusting any of it. Swift 6 mode was deliberately *not* done for
-> the same reason.
+> **Status 2026-08-03:** everything in *Do first* and *Worth doing* is
+> implemented and **verified green** — merged in
+> [#1](https://github.com/rbmrs/snapmark/pull/1) (`9f8ced1`). The work was
+> written on a machine with no Swift toolchain (Crostini/Linux; `swiftlang`
+> isn't installed and `Package.swift` requires tools 6.1 vs Debian's 6.0.3), so
+> the PR's own CI run was the first time any of it met a compiler. It passed
+> clean on the first attempt: build with `-warnings-as-errors`, 30 tests / 0
+> failures (including all 10 new `HistoryManagerTests`), and
+> `SnapmarkVerification`.
+>
+> Two caveats survive the green check:
+> - **CI exercises SwiftPM, not Xcode.** The hand-edited `project.pbxproj` is
+>   still unproven by an actual Xcode open.
+> - Swift 6 mode was deliberately left out, since migrating it blind with no
+>   local compiler wasn't worth the risk. It remains open below.
 
 ## Do first
 
@@ -144,7 +152,8 @@ in below. Ordered by impact.
   test into an Xcode compile failure, so both files were added.
   Validated structurally only (no Xcode here): the plist parses, 94 objects, no
   dangling references, and each target resolves to the expected source list.
-  **Confirm on the first Xcode open.**
+  CI passing does **not** confirm this — it builds via SwiftPM, which globs by
+  directory and never reads `project.pbxproj`. **Still needs a first Xcode open.**
 
 - [ ] **`release.yml` still doesn't depend on CI.** `needs:` only works between
   jobs in one workflow file, so gating means either duplicating build/test as a
