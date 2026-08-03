@@ -1,0 +1,36 @@
+name: CI
+
+# Runs on every push to `main` and every pull request. `release.yml` only fires
+# on `v*` tags, so this is the workflow that actually exercises the test suite.
+#
+# Both test commands are intentional and not redundant:
+#   • `swift test` runs the XCTest suite, which needs full Xcode's `xctest`.
+#   • `swift run SnapmarkVerification` is the XCTest-free smoke test, so it also
+#     passes under plain Command Line Tools — the toolchain `scripts/build-app.sh`
+#     deliberately supports.
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Build
+        run: swift build -Xswiftc -warnings-as-errors
+
+      - name: Test
+        run: swift test
+
+      - name: Verify
+        run: swift run SnapmarkVerification
