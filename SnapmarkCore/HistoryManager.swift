@@ -16,10 +16,23 @@ public final class HistoryManager {
     private let manifestURL: URL
     private let imagesDirectory: URL
 
-    public init() {
+    /// - Parameter baseURL: Container directory for the history store. Defaults to the
+    ///   user's Application Support directory; tests inject a temporary directory.
+    public init(
+        baseURL: URL = FileManager.default
+            .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+            .first
+            ?? URL(fileURLWithPath: NSHomeDirectory(), isDirectory: true)
+                .appendingPathComponent("Library", isDirectory: true)
+                .appendingPathComponent("Application Support", isDirectory: true)
+    ) {
         let fm = FileManager.default
-        let appSupport = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
-        let base = appSupport
+        // NOTE: "com.rbm.snapmark" does not match the app's real bundle identifier
+        // ("com.rafaelbm.Snapmark" in Snapmark/Info.plist, which scripts/build-app.sh pins
+        // in the codesign designated requirement). It is kept verbatim on purpose: this is
+        // the on-disk history path, and changing it would strand existing users' history.
+        // Do not swap it for Bundle.main.bundleIdentifier.
+        let base = baseURL
             .appendingPathComponent("com.rbm.snapmark")
             .appendingPathComponent("History")
         imagesDirectory = base
@@ -34,14 +47,23 @@ public final class HistoryManager {
         let id = UUID()
         let date = Date()
 
+        // Build the thumbnail before touching the disk. It works purely from the in-memory
+        // `pngData`, so nothing here depends on the full-size file already existing, and
+        // failing first means a throw leaves no untracked .png behind for `cleanupOrphans`.
+        let thumbnailData = try generateThumbnail(from: pngData)
+
         try fileManager.createDirectory(at: imagesDirectory, withIntermediateDirectories: true)
 
         let imageURL = imagesDirectory.appendingPathComponent("\(id.uuidString).png")
         let thumbURL = imagesDirectory.appendingPathComponent("\(id.uuidString)_thumb.png")
         try pngData.write(to: imageURL)
-
-        let thumbnailData = try generateThumbnail(from: pngData)
-        try thumbnailData.write(to: thumbURL)
+        do {
+            try thumbnailData.write(to: thumbURL)
+        } catch {
+            // Same reason: a half-written pair must not outlive the failed call.
+            removeFiles(for: id)
+            throw error
+        }
 
         entries.insert(HistoryEntry(id: id, date: date), at: 0)
 
