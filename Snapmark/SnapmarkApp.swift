@@ -44,6 +44,23 @@ struct SnapmarkApp: App {
                 }
             }
 
+            // Surfaced in the menu as well as Settings: a menu-bar app's Settings
+            // window is rarely open, so an update detected there would go unseen.
+            if model.updateAvailable {
+                Divider()
+
+                Button("Install Update…") {
+                    model.installUpdate()
+                }
+                .disabled(model.isInstallingUpdate)
+            } else if model.updateReadyToRelaunch {
+                Divider()
+
+                Button("Relaunch to Finish Update") {
+                    model.relaunchAfterUpdate()
+                }
+            }
+
             Divider()
 
             Button("Settings…") {

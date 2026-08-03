@@ -1,3 +1,8 @@
+// XCTest-free smoke test. It deliberately overlaps with SnapmarkCoreTests: on
+// macOS `swift test` requires full Xcode's `xctest`, but `scripts/build-app.sh`
+// supports building with plain Command Line Tools. This target runs on either,
+// so it stays the check that works everywhere. Do not delete it as a duplicate.
+
 import AppKit
 import CoreGraphics
 import SnapmarkCore

@@ -76,37 +76,27 @@ public enum ImageExporter {
         return data
     }
 
+    /// The single place that touches NSPasteboard — every other writer routes here.
     public static func writeToPasteboard(pngData: Data) {
-        let item = NSPasteboardItem()
-        item.setData(pngData, forType: .png)
-        if let image = NSImage(data: pngData), let tiff = image.tiffRepresentation {
-            item.setData(tiff, forType: .tiff)
-        }
-        let pasteboard = NSPasteboard.general
-        pasteboard.clearContents()
-        pasteboard.writeObjects([item])
-    }
-
-    public static func writeToPasteboard(_ image: CGImage) throws {
-        let representation = NSBitmapImageRep(cgImage: image)
-        guard let png = representation.representation(using: .png, properties: [:]) else {
-            throw ImageExporterError.unableToEncodePNG
-        }
-
         // Put the image on the pasteboard as a SINGLE item that offers both PNG
         // and TIFF. Mixing setData(_:forType:) with writeObjects([NSImage]) used
         // to create two separate pasteboard items, so apps that support
         // multi-image paste (chat clients) pasted the screenshot twice and sent
         // two messages.
         let item = NSPasteboardItem()
-        item.setData(png, forType: .png)
-        if let tiff = representation.tiffRepresentation {
+        item.setData(pngData, forType: .png)
+        if let image = NSImage(data: pngData), let tiff = image.tiffRepresentation {
             item.setData(tiff, forType: .tiff)
         }
 
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         pasteboard.writeObjects([item])
+    }
+
+    public static func writeToPasteboard(_ image: CGImage) throws {
+        let data = try pngData(from: image)
+        writeToPasteboard(pngData: data)
     }
 
     private static func draw(

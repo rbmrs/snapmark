@@ -39,6 +39,7 @@ struct HotKey: Equatable {
 enum HotKeyError: LocalizedError {
     case missingModifier
     case registrationFailed(OSStatus)
+    case handlerInstallFailed(OSStatus)
 
     var errorDescription: String? {
         switch self {
@@ -49,6 +50,9 @@ enum HotKeyError: LocalizedError {
                 return "That shortcut is already used by another application."
             }
             return "The shortcut could not be registered (error \(status))."
+        case .handlerInstallFailed(let status):
+            return "Keyboard shortcuts are unavailable (error \(status)). "
+                + "Use Capture Area in the menu bar."
         }
     }
 }
@@ -60,6 +64,10 @@ final class HotKeyManager {
     private var eventHandlerRef: EventHandlerRef?
     private let signature: OSType = 0x5052_4E54 // PRNT
     private let hotKeyID: UInt32 = 1
+    /// Result of installing the Carbon event handler. If this failed no hotkey
+    /// can ever fire, so `register(_:)` reports it instead of silently
+    /// succeeding; capture is still reachable from the menu bar.
+    private var handlerInstallStatus: OSStatus = noErr
 
     init() {
         var eventType = EventTypeSpec(
@@ -67,7 +75,7 @@ final class HotKeyManager {
             eventKind: UInt32(kEventHotKeyPressed)
         )
         let pointer = Unmanaged.passUnretained(self).toOpaque()
-        InstallEventHandler(
+        handlerInstallStatus = InstallEventHandler(
             GetEventDispatcherTarget(),
             { _, event, userData in
                 guard let event, let userData else { return noErr }
@@ -105,6 +113,10 @@ final class HotKeyManager {
     }
 
     func register(_ hotKey: HotKey) throws {
+        guard handlerInstallStatus == noErr else {
+            throw HotKeyError.handlerInstallFailed(handlerInstallStatus)
+        }
+
         let meaningfulModifiers = UInt32(cmdKey | optionKey | controlKey)
         guard hotKey.modifiers & meaningfulModifiers != 0 else {
             throw HotKeyError.missingModifier

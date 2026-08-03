@@ -11,6 +11,7 @@
 		A00000000000000000000002 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* Annotation.swift */; };
 		A00000000000000000000003 /* CaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* CaptureSession.swift */; };
 		A00000000000000000000004 /* ImageExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* ImageExporter.swift */; };
+		A00000000000000000000029 /* HistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000029 /* HistoryManager.swift */; };
 		A00000000000000000000005 /* SnapmarkApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* SnapmarkApp.swift */; };
 		A00000000000000000000006 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* AppModel.swift */; };
 		A00000000000000000000007 /* HotKeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000007 /* HotKeyManager.swift */; };
@@ -23,6 +24,7 @@
 		A0000000000000000000000C /* AnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* AnnotationTests.swift */; };
 		A0000000000000000000000D /* CaptureSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* CaptureSessionTests.swift */; };
 		A0000000000000000000000E /* ImageExporterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* ImageExporterTests.swift */; };
+		A0000000000000000000002A /* HistoryManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000002A /* HistoryManagerTests.swift */; };
 		A0000000000000000000000F /* SnapmarkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; };
 		A00000000000000000000010 /* SnapmarkCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A00000000000000000000011 /* SnapmarkCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B00000000000000000000012 /* SnapmarkCore.framework */; };
@@ -72,6 +74,7 @@
 		B00000000000000000000002 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		B00000000000000000000003 /* CaptureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSession.swift; sourceTree = "<group>"; };
 		B00000000000000000000004 /* ImageExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporter.swift; sourceTree = "<group>"; };
+		B00000000000000000000029 /* HistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManager.swift; sourceTree = "<group>"; };
 		B00000000000000000000005 /* SnapmarkApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapmarkApp.swift; sourceTree = "<group>"; };
 		B00000000000000000000006 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		B00000000000000000000007 /* HotKeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyManager.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		B0000000000000000000000D /* AnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000E /* CaptureSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureSessionTests.swift; sourceTree = "<group>"; };
 		B0000000000000000000000F /* ImageExporterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExporterTests.swift; sourceTree = "<group>"; };
+		B0000000000000000000002A /* HistoryManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryManagerTests.swift; sourceTree = "<group>"; };
 		B00000000000000000000010 /* Snapmark.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Snapmark.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000011 /* SnapmarkCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapmarkCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B00000000000000000000012 /* SnapmarkCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SnapmarkCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,7 @@
 				B00000000000000000000002 /* Annotation.swift */,
 				B00000000000000000000003 /* CaptureSession.swift */,
 				B00000000000000000000004 /* ImageExporter.swift */,
+				B00000000000000000000029 /* HistoryManager.swift */,
 			);
 			path = SnapmarkCore;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				B0000000000000000000000D /* AnnotationTests.swift */,
 				B0000000000000000000000E /* CaptureSessionTests.swift */,
 				B0000000000000000000000F /* ImageExporterTests.swift */,
+				B0000000000000000000002A /* HistoryManagerTests.swift */,
 			);
 			path = SnapmarkCoreTests;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				A00000000000000000000002 /* Annotation.swift in Sources */,
 				A00000000000000000000003 /* CaptureSession.swift in Sources */,
 				A00000000000000000000004 /* ImageExporter.swift in Sources */,
+				A00000000000000000000029 /* HistoryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +365,7 @@
 				A0000000000000000000000C /* AnnotationTests.swift in Sources */,
 				A0000000000000000000000D /* CaptureSessionTests.swift in Sources */,
 				A0000000000000000000000E /* ImageExporterTests.swift in Sources */,
+				A0000000000000000000002A /* HistoryManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
