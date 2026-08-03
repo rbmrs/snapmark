@@ -37,7 +37,10 @@ The global shortcut is configurable from the menu-bar settings.
 
 ```sh
 swift build -Xswiftc -warnings-as-errors
+swift test
 swift run SnapmarkVerification
 ```
+
+`swift test` runs the XCTest suite and needs full Xcode. `swift run SnapmarkVerification` is an XCTest-free smoke test, so it also works with only Apple Command Line Tools installed.
 
 Release packaging is documented in [docs/releasing.md](docs/releasing.md).
