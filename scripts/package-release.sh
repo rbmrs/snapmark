@@ -71,7 +71,12 @@ cask "snapmark" do
                    sudo: false
   end
 
-  zap trash: "~/Library/Preferences/com.rafaelbm.Snapmark.plist"
+  # History stores full-resolution PNGs under Application Support, so zapping
+  # the preferences plist alone would leave user screenshots on disk.
+  zap trash: [
+    "~/Library/Preferences/com.rafaelbm.Snapmark.plist",
+    "~/Library/Application Support/com.rbm.snapmark",
+  ]
 
   caveats <<~CAVEATS
     Snapmark asks for Screen Recording permission on first capture.
