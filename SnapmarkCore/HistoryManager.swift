@@ -85,6 +85,14 @@ public final class HistoryManager {
         return try? Data(contentsOf: url)
     }
 
+    public var directoryURL: URL {
+        imagesDirectory
+    }
+
+    public func imageURL(for id: UUID) -> URL {
+        imagesDirectory.appendingPathComponent("\(id.uuidString).png")
+    }
+
     public func clearAll() {
         entries.removeAll()
         try? fileManager.removeItem(at: imagesDirectory)

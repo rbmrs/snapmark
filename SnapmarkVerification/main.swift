@@ -87,4 +87,13 @@ let pasteboardItems = NSPasteboard.general.pasteboardItems ?? []
 require(pasteboardItems.count == 1, "single pasteboard item")
 require(pasteboardItems.first?.data(forType: .png) != nil, "pasteboard PNG data")
 
+// Verify HistoryManager directoryURL and imageURL
+MainActor.assumeIsolated {
+    let tempHistoryURL = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    let historyManager = HistoryManager(baseURL: tempHistoryURL)
+    require(historyManager.directoryURL.lastPathComponent == "History", "HistoryManager directoryURL")
+    let testID = UUID()
+    require(historyManager.imageURL(for: testID).lastPathComponent == "\(testID.uuidString).png", "HistoryManager imageURL")
+}
+
 print("Snapmark verification passed")
