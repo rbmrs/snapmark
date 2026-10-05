@@ -1,8 +1,6 @@
 # Snapmark
 
-Minimal macOS screenshot annotation from the menu bar.
-
-Click two corners, add rectangles or arrows, then press Return to copy the result.
+Minimal macOS screenshot tool.
 
 ## Install
 
