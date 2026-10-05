@@ -3,8 +3,8 @@ import Foundation
 
 struct HotKey: Equatable {
     static let defaultValue = HotKey(
-        keyCode: UInt32(kVK_ANSI_4),
-        modifiers: UInt32(optionKey | shiftKey)
+        keyCode: UInt32(kVK_ANSI_P),
+        modifiers: UInt32(controlKey | shiftKey)
     )
 
     var keyCode: UInt32
