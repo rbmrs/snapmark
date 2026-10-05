@@ -2,7 +2,7 @@
 
 Minimal macOS screenshot annotation from the menu bar.
 
-Press `⌥⇧4`, click two corners, add rectangles or arrows, then press Return to copy the result.
+Click two corners, add rectangles or arrows, then press Return to copy the result.
 
 ## Install
 
