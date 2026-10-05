@@ -21,7 +21,7 @@ Snapmark is unsigned and not notarized; the cask strips the quarantine flag on i
 
 ## Usage
 
-- `⌥⇧4`: start capture
+- `⌃⇧P`: start capture
 - Two clicks: select the crop or draw an annotation
 - `V`, `R`, `A`: select, rectangle, arrow
 - `⌘Z`: undo
