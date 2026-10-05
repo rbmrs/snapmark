@@ -20,6 +20,9 @@ echo "Building Snapmark ($CONFIGURATION, archs: $ARCHS)…"
 # multi-arch (`--arch a --arch b`) build, which requires full Xcode's xcbuild.
 # The slices are merged into a universal binary with lipo below.
 SLICES=()
+SLICES_DIR="$(mktemp -d)"
+trap 'rm -rf "$SLICES_DIR"' EXIT
+
 for ARCH in ${(s: :)ARCHS}; do
   echo "  • $ARCH"
   swift build \
@@ -27,13 +30,16 @@ for ARCH in ${(s: :)ARCHS}; do
     --product Snapmark \
     --arch "$ARCH" \
     -Xswiftc -warnings-as-errors
-  SLICE="$(swift build --configuration "$CONFIGURATION" --arch "$ARCH" --show-bin-path)/Snapmark"
+  BIN_DIR="$(swift build --configuration "$CONFIGURATION" --arch "$ARCH" --show-bin-path)"
+  SLICE="$BIN_DIR/Snapmark"
   if [[ ! -x "$SLICE" ]]; then
     echo "Build succeeded but the $ARCH executable was not found at:"
     echo "$SLICE"
     exit 1
   fi
-  SLICES+=("$SLICE")
+  ARCH_SLICE="$SLICES_DIR/Snapmark-$ARCH"
+  cp "$SLICE" "$ARCH_SLICE"
+  SLICES+=("$ARCH_SLICE")
 done
 
 rm -rf "$APP_DIR"
