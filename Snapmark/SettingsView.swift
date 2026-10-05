@@ -76,9 +76,25 @@ struct SettingsView: View {
 
             LabeledContent("History") {
                 HStack(spacing: 8) {
-                    Text("\(model.historyManager.entries.count) screenshot\(model.historyManager.entries.count == 1 ? "" : "s")")
+                    if model.historyManager.entries.isEmpty {
+                        Text("0 screenshots")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        Button {
+                            model.openHistoryInFinder()
+                        } label: {
+                            HStack(spacing: 3) {
+                                Text("\(model.historyManager.entries.count) screenshot\(model.historyManager.entries.count == 1 ? "" : "s")")
+                                Image(systemName: "arrow.up.forward.square")
+                                    .imageScale(.small)
+                            }
+                        }
+                        .buttonStyle(.link)
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .help("Show in Finder")
+                    }
+
                     if !model.historyManager.entries.isEmpty {
                         Button("Clear History") {
                             model.clearHistory()

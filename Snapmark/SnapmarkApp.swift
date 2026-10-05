@@ -38,6 +38,9 @@ struct SnapmarkApp: App {
                         }
                     }
                     Divider()
+                    Button("Show in Finder") {
+                        model.openHistoryInFinder()
+                    }
                     Button("Clear History") {
                         model.clearHistory()
                     }

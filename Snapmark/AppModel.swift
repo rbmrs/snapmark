@@ -163,6 +163,19 @@ final class AppModel: ObservableObject {
         objectWillChange.send()
     }
 
+    func openHistoryInFinder() {
+        let dir = historyManager.directoryURL
+        try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        if let first = historyManager.entries.first {
+            let fileURL = historyManager.imageURL(for: first.id)
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                NSWorkspace.shared.activateFileViewerSelecting([fileURL])
+                return
+            }
+        }
+        NSWorkspace.shared.open(dir)
+    }
+
     // MARK: - Onboarding & permissions
 
     var hasCompletedOnboarding: Bool {
