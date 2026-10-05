@@ -8,19 +8,27 @@ import os
 
 private let logger = Logger(subsystem: "com.rafaelbm.Snapmark", category: "AppModel")
 
-/// Result of a shell invocation. `output` carries stdout and stderr interleaved:
-/// Homebrew reports its failures on stderr, and those are exactly the lines worth
-/// showing the user when an upgrade doesn't take.
+/// Result of a shell invocation, with stdout and stderr captured separately.
+/// Homebrew reports diagnostic warnings (like deprecations) and progress on stderr,
+/// while `brew outdated` writes the actual outdated cask names to stdout.
 private struct ShellResult: Sendable {
     let status: Int32
-    let output: String
+    let stdout: String
+    let stderr: String
 
     var succeeded: Bool { status == 0 }
+
+    var output: String {
+        if stdout.isEmpty { return stderr }
+        if stderr.isEmpty { return stdout }
+        return "\(stdout)\n\(stderr)"
+    }
 
     /// Last non-empty output line, clipped — enough to identify a failure without
     /// spilling a full Homebrew log into a settings label.
     var lastLine: String {
-        let lines = output.split(separator: "\n").map { $0.trimmingCharacters(in: .whitespaces) }
+        let text = stderr.isEmpty ? stdout : stderr
+        let lines = text.split(separator: "\n").map { $0.trimmingCharacters(in: .whitespaces) }
         guard let last = lines.last(where: { !$0.isEmpty }) else { return "" }
         return last.count > 120 ? String(last.prefix(120)) + "…" : last
     }
@@ -271,10 +279,14 @@ final class AppModel: ObservableObject {
             if refreshingTaps {
                 _ = AppModel.runShell("\"\(brew)\" update --quiet")
             }
-            // `brew outdated` prints nothing when there's nothing to do; its exit
-            // status isn't a reliable signal here, so go by the output.
-            let outdated = AppModel.runShell("\"\(brew)\" outdated --cask snapmark")
-            let isOutdated = !outdated.output.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            // `brew outdated` prints the outdated name on stdout when an update exists.
+            // Homebrew emits deprecation warnings and API download progress on stderr,
+            // so we check stdout specifically to avoid false positives.
+            let outdated = AppModel.runShell("\"\(brew)\" outdated --cask --quiet snapmark")
+            let isOutdated = outdated.stdout
+                .split(whereSeparator: \.isNewline)
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .contains("snapmark")
             await MainActor.run {
                 AppModel.shared.finishUpdateCheck(isOutdated: isOutdated, brewMissing: false)
             }
@@ -384,21 +396,46 @@ final class AppModel: ObservableObject {
         let task = Process()
         task.executableURL = URL(fileURLWithPath: "/bin/sh")
         task.arguments = ["-c", command]
-        // stdout and stderr share one pipe: we read it to EOF before waiting, so
-        // there's no buffer to deadlock on, and Homebrew's diagnostics come along.
-        let pipe = Pipe()
-        task.standardOutput = pipe
-        task.standardError = pipe
+
+        let stdoutPipe = Pipe()
+        let stderrPipe = Pipe()
+        task.standardOutput = stdoutPipe
+        task.standardError = stderrPipe
+
         do {
             try task.run()
         } catch {
-            return ShellResult(status: -1, output: error.localizedDescription)
+            return ShellResult(status: -1, stdout: "", stderr: error.localizedDescription)
         }
-        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+
+        let stdoutHandle = stdoutPipe.fileHandleForReading
+        let stderrHandle = stderrPipe.fileHandleForReading
+
+        var stdoutData = Data()
+        var stderrData = Data()
+        let group = DispatchGroup()
+
+        group.enter()
+        DispatchQueue.global().async {
+            let data = stdoutHandle.readDataToEndOfFile()
+            stdoutData = data
+            group.leave()
+        }
+
+        group.enter()
+        DispatchQueue.global().async {
+            let data = stderrHandle.readDataToEndOfFile()
+            stderrData = data
+            group.leave()
+        }
+
+        group.wait()
         task.waitUntilExit()
+
         return ShellResult(
             status: task.terminationStatus,
-            output: String(data: data, encoding: .utf8) ?? ""
+            stdout: String(data: stdoutData, encoding: .utf8) ?? "",
+            stderr: String(data: stderrData, encoding: .utf8) ?? ""
         )
     }
 }
