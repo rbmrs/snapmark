@@ -15,6 +15,7 @@ struct SettingsView: View {
                     onEndRecording: { model.resumeHotKey() }
                 )
                 .frame(width: 150, height: 28)
+                .alignmentGuide(.firstTextBaseline) { d in d.height / 2 + 4 }
             }
 
             if let error = model.hotKeyError {
