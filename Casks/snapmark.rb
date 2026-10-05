@@ -31,17 +31,15 @@ cask "snapmark" do
   # Snapmark is ad-hoc signed (no Apple Developer ID). Stripping the quarantine
   # xattr stops Gatekeeper from blocking the unsigned app on first launch. Safe
   # because the user explicitly opted into this tap.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/Snapmark.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/Snapmark.app"]
   end
 
   # History stores full-resolution PNGs under Application Support, so zapping
   # the preferences plist alone would leave user screenshots on disk.
   zap trash: [
-    "~/Library/Preferences/com.rafaelbm.Snapmark.plist",
     "~/Library/Application Support/com.rbm.snapmark",
+    "~/Library/Preferences/com.rafaelbm.Snapmark.plist",
   ]
 
   caveats <<~CAVEATS
